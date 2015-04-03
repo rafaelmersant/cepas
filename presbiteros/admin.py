@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Presbitero
+
+class PresbiteroAdmin(admin.ModelAdmin):
+	list_display = ['id','miembro','estatus',]
+	
+
+admin.site.register(Presbitero,PresbiteroAdmin)

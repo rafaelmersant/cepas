@@ -1,7 +1,7 @@
 from django.db import models
 
 from credenciales.models import Credencial
-from estatus.models import Estatu
+from estatus.models import Estatus
 from iglesias.models import Iglesia
 from pastores.models import Pastor
 from miembros.models import Miembro
@@ -12,7 +12,7 @@ class Obrero(models.Model):
 	
 	obrero = models.ForeignKey(Miembro)
 	credencial = models.ForeignKey(Credencial)
-	estatus = models.ForeignKey(Estatu)
+	estatus = models.ForeignKey(Estatus)
 	iglesia = models.ForeignKey(Iglesia)
 	pastor = models.ForeignKey(Pastor)
 

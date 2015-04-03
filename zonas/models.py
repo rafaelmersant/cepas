@@ -38,7 +38,7 @@ class Zona(models.Model):
 						('32','Valverde'),
 						)
 	Descripcion = models.CharField(max_length=80)
-	Provincia = models.CharField(max_length=1,choices=provincias_choices)
+	Provincia = models.CharField(max_length=2,choices=provincias_choices)
 
 	def __unicode__(self):
 		return self.Descripcion

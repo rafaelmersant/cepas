@@ -1,14 +1,14 @@
 from django.db import models
 
 from miembros.models import Miembro
-from estatus.models import Estatu
+from estatus.models import Estatus
 from zonas.models import Zona
 
 class Presbitero(models.Model):
 	fecha = models.DateField()
 
 	miembro = models.ForeignKey(Miembro)
-	estatus = models.ForeignKey(Estatu)
+	estatus = models.ForeignKey(Estatus)
 
 
 class Presbitero_Asign(models.Model):

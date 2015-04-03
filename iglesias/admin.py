@@ -7,10 +7,9 @@ from zonas.models import Zona
 # 	model = Zona
 # 	extra = 1
 
-class ListaSelf(admin.ModelAdmin):
-	list_display = ('alias','titulo')
-	search_fields = ('alias','titulo')
-	# inlines = [ZonaSelf]
+class IglesiaAdmin(admin.ModelAdmin):
+	list_display = ['zona','titulo_conciliar','titulo_local','direccion','telefono_contacto','tipo_iglesia','fecha_fundacion','estatus']
+	search_fields = ('titulo_conciliar','titulo_local')
+	list_editable = ('zona','titulo_conciliar','titulo_local','direccion','telefono_contacto','tipo_iglesia','fecha_fundacion','estatus')
 
-
-admin.site.register(Iglesia,ListaSelf)
+admin.site.register(Iglesia,IglesiaAdmin)

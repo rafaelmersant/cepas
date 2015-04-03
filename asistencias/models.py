@@ -1,6 +1,7 @@
 from django.db import models
 
 from obreros.models import Obrero
+from reuniones.models import Reunion
 
 class Asistencia(models.Model):
 	motivo_choices = (
@@ -14,3 +15,4 @@ class Asistencia(models.Model):
 	excusa_descrp = models.TextField(max_length=200, blank=True)
 
 	obrero = models.ForeignKey(Obrero)
+	reunion = models.ForeignKey(Reunion)

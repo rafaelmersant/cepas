@@ -1,7 +1,7 @@
 from django.db import models
 
 from zonas.models import Zona
-from estatus.models import Estatu
+from estatus.models import Estatus
 
 class Iglesia(models.Model):
 	tipo_iglesia_choices = (
@@ -24,9 +24,9 @@ class Iglesia(models.Model):
 	local				= models.CharField(max_length=1, choices=tipo_local_choices)
 	observacion			= models.TextField(max_length=100, blank=True)
 
-	estatus				= models.ForeignKey(Estatu)
+	estatus				= models.ForeignKey(Estatus)
 	zona 				= models.ForeignKey(Zona)
 
 	
 	def  __unicode__(self):
-		return self.alias
+		return self.titulo_conciliar

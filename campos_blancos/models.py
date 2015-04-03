@@ -1,6 +1,6 @@
 from django.db import models
 
-from estatus.models import Estatu
+from estatus.models import Estatus
 from miembros.models import Miembro
 from iglesias.models import Iglesia
 
@@ -11,6 +11,6 @@ class CampoBlanco(models.Model):
 	fecha_inicio = models.DateField(blank=True)
 	observacion = models.CharField(max_length=100, blank=True)
 	
-	estatus = models.ForeignKey(Estatu)
+	estatus = models.ForeignKey(Estatus)
 	encargado = models.ForeignKey(Miembro)
 	iglesia = models.ForeignKey(Iglesia)

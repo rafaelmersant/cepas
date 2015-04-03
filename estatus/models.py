@@ -1,6 +1,6 @@
 from django.db import models
 
-class Estatu(models.Model):
+class Estatus(models.Model):
 	para_choices = (
 					('M','Miembro'),
 					('O','Obrero'),

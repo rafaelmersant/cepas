@@ -4,7 +4,7 @@ from django.db import models
 
 from cargos.models import Cargo
 from iglesias.models import Iglesia
-from estatus.models import Estatu
+from estatus.models import Estatus
 from areas.models import Area
 
 class Miembro(models.Model):
@@ -45,7 +45,12 @@ class Miembro(models.Model):
 					 		('M','Miembro'),
 					 		('A','Asociado'),
 						   )
-
+	
+	bautizado_choices = (
+					 	 ('N','NO'),
+					 	 ('S','SI'),
+						)
+	
 	pareja_cristiana_choices = (
 					 			 ('S','SI'),
 					 			 ('N','NO'),
@@ -63,7 +68,7 @@ class Miembro(models.Model):
 	mes_nacimiento 		= models.CharField(max_length=2, choices=mes_nacimiento_choices)
 	anio_nacimiento 	= models.PositiveIntegerField(blank=True)
 	sociedad 			= models.CharField(max_length=1, choices=sociedad_choices)
-	bautizado 			= models.DateField(blank=True)
+	bautizado 			= models.CharField(max_length=2, choices=bautizado_choices,default=bautizado_choices[0][0])
 	fecha_bautismo 		= models.DateField(blank=True)
 	fecha_profesionfe 	= models.DateField(blank=True)
 	tipo_miembro 		= models.CharField(max_length=1, choices=tipo_miembro_choices)
@@ -74,7 +79,7 @@ class Miembro(models.Model):
 	pareja_cristiana 	= models.CharField(max_length=1,choices=pareja_cristiana_choices)
 
 	iglesia 			= models.ForeignKey(Iglesia)
-	estatus 			= models.ForeignKey(Estatu)
+	estatus 			= models.ForeignKey(Estatus)
 
 
 class Miembro_Cargo(models.Model):
@@ -112,4 +117,4 @@ class TrayectoriaMiembro(models.Model):
 	fecha = models.DateField()
 
 	miembro = models.ForeignKey(Miembro)
-	estatus = models.ForeignKey(Estatu)
+	estatus = models.ForeignKey(Estatus)

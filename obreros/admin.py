@@ -4,13 +4,8 @@ from .models import Obrero
 from iglesias.models import Iglesia
 
 
-class EnlaceInline(admin.StackedInline):
-	model = Iglesia
-	extra = 1
+class ObreroAdmin(admin.ModelAdmin):
+	list_display = ['anio_nombramiento','obrero','credencial','estatus','iglesia','pastor',]
+	search_fields = ('obrero',)
 	
-class ObreroSelf(admin.ModelAdmin):
-	search_fields = ('Nombre',)
-	raw_id_fields = ('iglesia_id')
-	inlines = [EnlaceInline]
-
-admin.site.register(Obrero)
+admin.site.register(Obrero,ObreroAdmin)

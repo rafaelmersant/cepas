@@ -2,14 +2,14 @@ from django.db import models
 
 from iglesias.models import Iglesia
 from miembros.models import Miembro
-from estatus.models import Estatu
+from estatus.models import Estatus
 
 class Pastor(models.Model):
 	tipo_pastor_choices = (('Titular','Titular'),('NTitular','No Titular'),)
 	fecha = models.DateField()
 
 	miembro = models.ForeignKey(Miembro)
-	estatus = models.ForeignKey(Estatu)
+	estatus = models.ForeignKey(Estatus)
 	tipo_pastor = models.CharField(max_length=10,choices=tipo_pastor_choices)
 
 	def __unicode__(self):
