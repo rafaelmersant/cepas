@@ -36,9 +36,10 @@ class Zona(models.Model):
 						('30','Santiago Rodriguez'),
 						('31','Santo Domingo'),
 						('32','Valverde'),
+						('33','Internacional'),
 						)
 	Descripcion = models.CharField(max_length=80)
-	Provincia = models.CharField(max_length=2,choices=provincias_choices)
+	Provincia = models.CharField(max_length=2, choices=provincias_choices)
 
 	def __unicode__(self):
 		return self.Descripcion

@@ -46,7 +46,6 @@ INSTALLED_APPS = (
     'credenciales',
     'cuerpos_oficiales',
     'cuotas',
-    'estatus',
     'iglesias',
     'miembros',
     'mobiliarios',

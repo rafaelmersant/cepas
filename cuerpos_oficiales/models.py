@@ -13,3 +13,7 @@ class Cuerpo_Oficial(models.Model):
 	cargo = models.ForeignKey(Cargo)
 	iglesia = models.ForeignKey(Iglesia)
 	pastor = models.ForeignKey(Pastor)
+
+	class Meta:
+		verbose_name = 'Cuerpo Oficial'
+		verbose_name_plural = 'Cuerpos Oficiales'
