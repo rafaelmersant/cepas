@@ -1,0 +1,118 @@
+// @import 'nib/vendor'
+// @import 'nib/gradients'
+@import 'normalize'
+
+
+// vendor-prefixes = o ms webkit moz
+
+verde = #084C0B
+verdeClarito = #2BA92D
+verdeSubMenu = #138814 //#6ABF40
+verdeSuave = #94E698
+verdeMuySuave = #E1FFDD
+rojoClaro = #F63735
+rojoOscuro = #A81E1A
+mamey = #FF5A13
+amarillo = #FFF676
+amarilloOscuro = #CCA915
+verdeMuyOscuro = #132B14
+colorBordeSubMenu = lightgreen
+
+body
+	font-family "Arial", sans-serif, "serif"
+	font-size 14px
+	background lightblue
+	
+footer
+	background verdeMuyOscuro
+	color white
+	border-top 1.5px solid verdeSubMenu
+	bottom 0
+	left 0
+	right 0
+	height 2em
+	position absolute
+	// width 100%
+.imgHome-content
+	margin 4em auto
+	text-align center
+	
+.imgHome
+	width 50%
+	border-radius 50%
+	// border 2px solid blue
+	opacity .05
+
+.header
+	background white
+	display block
+	overflow hidden
+	padding 0
+	position relative
+	border-bottom 2px solid gray
+	box-shadow 2px 2px 22px 1px gray
+	
+.content-logo
+	float left
+	margin 0 0 0 .5em
+	padding 0
+	& a
+		outline none
+
+.logo
+	margin .2em 0 .1em .3em
+	width 75px
+	border-radius 50%
+
+.content-title
+	display inline-block
+	
+&.titleCepas
+	font-size 1rem
+	font-weight bold
+	margin .9rem 0 0 .2rem
+	&.titleCepas2
+		margin 0 0 0 .2rem
+
+.usuario
+	float right
+	margin 0 .4em .2em 0
+	bottom 0
+	right 0
+	position absolute
+	
+	&:before
+		font-size 2em
+		color verdeMuyOscuro
+		
+
+//CLASES GENERICAS
+
+.Boton-azul //CLASE para darle formato a los botones
+	background #2665CC
+	border 0
+	border-bottom .1rem solid #0E0E95
+	border-radius 2px 2px 3px 3px
+	color white
+	height 2.2em
+	transition .1s
+	outline none
+	
+	&:hover
+		opacity .87
+		// background brown
+		// border-bottom .1rem solid yellow
+		// color white
+		
+.Boton-disabled //CLASE para darle apariencia deshabilitado a botones
+	background lightgray !important
+	border 0 !important
+	border-bottom .3rem solid gray !important
+	border-radius 3px 3px 3px 3px !important
+	color black !important
+	height 2.2em
+	transition .1s !important
+	outline none !important
+
+
+//FIN CLASES GENERICAS

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load staticfiles %}
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Sistema del Concilio Arca de Salvacion">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+
+	<title>{% block title %} {% endblock title%}</title>
+	<link rel="stylesheet" type="text/css" href={% static "css/estilos.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "css/jquery-ui.css" %}>
+
+	<link rel="shortcut icon" type="image/png" href={% static "images/logocepas.png" %} />
+
+</head>
+
+<body ng-app="cepas">
+	<header class="header">
+		<figure class="content-logo">
+			<a href="/"><img class="logo" src={% static "images/logocepasH.jpg" %} alt=""></a>
+		</figure>
+
+		<div class="icon-user usuario">{{user}} | {{localidad}}</div>
+		<div class="content-title">
+			<p class="titleCepas">Concilio Evangelico Pentecostal "ARCA DE SALVACION", INC.</p>
+			<p class="titleCepas titleCepas2">Sistema de Administración</p>			
+		</div>
+	</header>
+
+	{% block content %}
+
+	{% endblock content %}
+
+	
+	<script type="text/javascript" src={% static "js/lib/underscore-min.js" %} ></script>
+	<script type="text/javascript" src={% static "js/lib/jquery-1.11.1.min.js" %} ></script>
+	<script type="text/javascript" src={% static "js/lib/jquery-ui.min.js" %} ></script>
+	<script type="text/javascript" src={% static "js/lib/angular.min.js" %} ></script>
+	<script type="text/javascript" src={% static "js/lib/angular-router.min.js" %} ></script>
+	<script type="text/javascript" src={% static "js/lib/angular-animate.min.js" %} ></script>
+
+	<script type="text/javascript" src={% static "js/app.js" %} ></script>
+	<script type="text/javascript" src={% static "js/menu.js" %} ></script>
+	<script type="text/javascript" src={% static "js/homepage.js" %} ></script>
+
+</body>
+</html>
