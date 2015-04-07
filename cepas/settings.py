@@ -35,26 +35,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'mockups',
+    'rest_framework',
     'cepas',
-    'areas',
-    'ascensos',
-    'asistencias',
-    'campos_blancos',
-    'cargos',
-    'casos',
-    'conceptos_tesoreria',
-    'credenciales',
-    'cuerpos_oficiales',
-    'cuotas',
-    'iglesias',
-    'miembros',
-    'mobiliarios',
+    'administracion',
     'obreros',
-    'pastores',
-    'presbiteros',
     'reuniones',
     'transacciones',
-    'zonas',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cepas.logtimeout.SessionExpiredMiddleware',
 )
 
 ROOT_URLCONF = 'cepas.urls'
