@@ -1,3 +1,4 @@
+cepas/settings.py
 ./**/migrations
 *.pyc
 

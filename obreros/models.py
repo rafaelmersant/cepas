@@ -47,7 +47,7 @@ class Ascenso(models.Model):
 	rango_nuevo = models.ForeignKey(Credencial)
 
 	def __unicode__(self):
-		return self.obrero
+		return self.obrero.obrero.nombreCompleto
 
 	class Meta:
 		ordering = ('obrero','-anio')

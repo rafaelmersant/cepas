@@ -39,9 +39,10 @@ class MobiliarioInline(admin.StackedInline):
 
 @admin.register(Iglesia)
 class IglesiaAdmin(admin.ModelAdmin):
-	list_display = ['id','titulo_conciliar', 'titulo_local', 'telefono_contacto', 'fecha_fundacion']
-	list_editable = ('titulo_conciliar', 'titulo_local', 'telefono_contacto', 'fecha_fundacion')
+	list_display = ['id','titulo_conciliar', 'titulo_local', 'zona', 'telefono_contacto', 'fecha_fundacion']
+	list_editable = ('titulo_conciliar', 'titulo_local', 'zona', 'telefono_contacto', 'fecha_fundacion')
 	search_fields = ('titulo_conciliar', 'titulo_local')
+	list_filter = ('zona',)
 
 	inlines = [CampoBlancoInline, MobiliarioInline]
 

@@ -12,4 +12,5 @@ urlpatterns = patterns('',
 
     url(r'^$', 'cepas.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'accounts/login/$', 'cepas.views.login', name='login')
 )
