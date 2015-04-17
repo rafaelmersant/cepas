@@ -95,6 +95,15 @@ class Zona(models.Model):
 	def __unicode__(self):
 		return self.descripcion
 
+	@property
+	def Presbitero(self):
+		try:
+			p = Presbitero_Asign.objects.get(fecha_fin='9999-12-31', zona__id=self.id)
+			presbitero = p.presbitero.miembro.nombreCompleto
+		except Exception as e:
+			presbitero = 'NO ASIGNADO'
+		return presbitero
+
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name_plural = '7) Zonas'
@@ -136,16 +145,29 @@ class Iglesia(models.Model):
 	telefono_contacto 	= models.CharField(max_length=50, blank=True)
 	tipo_iglesia 		= models.CharField(max_length=1,choices=tipo_iglesia_choices, default='M', blank=True)
 	denominacion_origen = models.CharField(max_length=100, blank=True)
-	fecha_fundacion		= models.DateField(blank=True)
+	fecha_fundacion		= models.DateField(blank=True, null=True)
 	local				= models.CharField(max_length=1, choices=tipo_local_choices, blank=True)
 	observacion			= models.TextField(max_length=100, blank=True)
 
 	estatus				= models.CharField(max_length=1, choices=estatus_choices, default='A')
 	zona 				= models.ForeignKey(Zona, null=True, blank=True)
 
-	
+	creadaFecha			= models.DateTimeField(auto_now_add=True)
+	creadaPor			= models.ForeignKey(User, null=True, editable=False)
+	modificada			= models.DateTimeField(auto_now=True)
+	modificadaPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
+
 	def  __unicode__(self):
 		return self.titulo_conciliar
+
+	@property
+	def Pastor(self):
+		try:
+			p = Pastor_Asign.objects.get(fecha_fin='9999-12-31', iglesia__id=self.id)
+			pastor = p.pastor.miembro.nombreCompleto
+		except Exception as e:
+			pastor = 'NO ASIGNADO'
+		return pastor
 
 	class Meta:
 		ordering = ('titulo_conciliar',)
@@ -233,6 +255,11 @@ class Miembro(models.Model):
 	iglesia 			= models.ForeignKey(Iglesia, blank=True, null=True)
 	estatus 			= models.CharField(max_length=1, choices=estatus_choices, default='A')
 
+	creadaFecha			= models.DateTimeField(auto_now_add=True)
+	creadaPor			= models.ForeignKey(User, null=True, editable=False)
+	modificada			= models.DateTimeField(auto_now=True)
+	modificadaPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
+
 	def __unicode__(self):
 		return '%s %s' % (self.nombres, self.apellidos)
 
@@ -248,8 +275,8 @@ class Miembro(models.Model):
 
 # Cargos relacionados al miembro
 class Miembro_Cargo(models.Model):
-	anio_inicio = models.PositiveIntegerField("Año Inicio")
-	anio_fin = models.PositiveIntegerField("Año Fin")
+	anio_inicio = models.PositiveIntegerField("Año Inicio", null=True, blank=True)
+	anio_fin = models.PositiveIntegerField("Año Fin", default=9999, null=True, blank=True)
 
 	miembro = models.ForeignKey(Miembro)
 	cargo = models.ForeignKey(Cargo)
@@ -272,10 +299,14 @@ class Curso_Miembro(models.Model):
 					 ('O','Otro'),
 					)
 
+	clasificacion_choices = (('E','Eclesiastico'), ('S','Secular'))
+
 	curso_descripcion = models.CharField(max_length=150, blank=True)
 	institucion = models.CharField(max_length=150, blank=True)
-	anio = models.PositiveIntegerField("Año")
+	anio_inicio = models.PositiveIntegerField("Año Inicio", null=True, blank=True)
+	anio_fin = models.PositiveIntegerField("Año Fin", null=True, blank=True)
 	nivel = models.CharField(max_length=1, choices=nivel_choices)
+	clasificacion = models.CharField(max_length=1, choices=clasificacion_choices, blank=True, null=True)
 
 	miembro = models.ForeignKey(Miembro)
 
@@ -370,7 +401,7 @@ class Pastor(models.Model):
 # Cuando un pastor es asignado en un iglesia
 class Pastor_Asign(models.Model):
 	fecha_inicio = models.DateField(blank=True, null=True)
-	fecha_fin = models.DateField(blank=True, null=True)
+	fecha_fin = models.DateField(blank=True, null=True, default='31/12/9999')
 
 	pastor = models.ForeignKey(Pastor)
 	iglesia = models.ForeignKey(Iglesia)
@@ -406,7 +437,7 @@ class Presbitero(models.Model):
 # Cuando el presbitero es asignado a una zona
 class Presbitero_Asign(models.Model):
 	fecha_inicio = models.DateField(blank=True, null=True)
-	fecha_fin = models.DateField(blank=True, null=True)
+	fecha_fin = models.DateField(blank=True, null=True, default='31/12/9999')
 	
 	presbitero = models.ForeignKey(Presbitero)
 	zona = models.ForeignKey(Zona)
@@ -436,24 +467,6 @@ class Mobiliario(models.Model):
 		verbose_name_plural = 'Mobiliarios'
 
 
-# Cuerpo Oficial
-class Cuerpo_Oficial(models.Model):
-	desde = models.DateField(blank=True, null=True)
-	hasta = models.DateField(blank=True, null=True)
-
-	miembro = models.ForeignKey(Miembro)
-	cargo = models.ForeignKey(Cargo)
-	iglesia = models.ForeignKey(Iglesia)
-	pastor = models.ForeignKey(Pastor)
-
-	def __unicode__(self):
-		return '%s %s' % (self.miembro.nombres, self.miembro.apellidos)
-
-	class Meta:
-		verbose_name = 'Cuerpo Oficial'
-		verbose_name_plural = '2) Cuerpos Oficiales'
-
-
 # Campos Blancos de iglesias
 class CampoBlanco(models.Model):
 	estatus_choices = (('A','Activo'), ('I','Inactivo'))
@@ -474,3 +487,22 @@ class CampoBlanco(models.Model):
 		ordering = ('direccion',)
 		verbose_name = 'Campo Blanco'
 		verbose_name_plural = 'Campos Blancos'
+
+
+# Cuerpo Oficial
+class Cuerpo_Oficial(models.Model):
+	desde = models.DateField(blank=True, null=True)
+	hasta = models.DateField(blank=True, null=True)
+
+	miembro = models.ForeignKey(Miembro)
+	cargo = models.ForeignKey(Cargo)
+	iglesia = models.ForeignKey(Iglesia)
+	pastor = models.ForeignKey(Pastor)
+
+	def __unicode__(self):
+		return '%s %s' % (self.miembro.nombres, self.miembro.apellidos)
+
+	class Meta:
+		verbose_name = 'Cuerpo Oficial'
+		verbose_name_plural = '2) Cuerpos Oficiales'
+

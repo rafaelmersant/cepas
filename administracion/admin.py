@@ -23,44 +23,62 @@ class CargoAdmin(admin.ModelAdmin):
 	list_editable = ('descripcion', 'tipo_cargo', 'area',)
 	search_fields = ('descripcion',)
 
+class Presbitero_AsignInline(admin.StackedInline):
+	model = Presbitero_Asign
+	extra = 0
+
 @admin.register(Zona)
 class ZonaAdmin(admin.ModelAdmin):
-	list_display = ['id','descripcion',]
+	list_display = ['id','descripcion','Presbitero']
 	list_editable = ('descripcion',)
 	search_fields = ('descripcion',)
 
+	inlines = [Presbitero_AsignInline,]
+
 class CampoBlancoInline(admin.StackedInline):
 	model = CampoBlanco
-	extra = 1
+	extra = 0
 
 class MobiliarioInline(admin.StackedInline):
 	model = Mobiliario
-	extra = 1
+	extra = 0
+
+class Pastor_AsignInline(admin.StackedInline):
+	model = Pastor_Asign
+	extra = 0
 
 @admin.register(Iglesia)
 class IglesiaAdmin(admin.ModelAdmin):
-	list_display = ['id','titulo_conciliar', 'titulo_local', 'zona', 'telefono_contacto', 'fecha_fundacion']
-	list_editable = ('titulo_conciliar', 'titulo_local', 'zona', 'telefono_contacto', 'fecha_fundacion')
+	list_display = ['id','titulo_conciliar', 'titulo_local', 'zona', 'Pastor', 'fecha_fundacion', 'creadaPor', 'creadaFecha', 'modificadaPor', 'modificada']
+	list_editable = ('titulo_conciliar', 'titulo_local', 'zona', 'fecha_fundacion')
 	search_fields = ('titulo_conciliar', 'titulo_local')
 	list_filter = ('zona',)
 
-	inlines = [CampoBlancoInline, MobiliarioInline]
+	inlines = [CampoBlancoInline, MobiliarioInline, Pastor_AsignInline]
+
+	def save_model(self, request, obj, form, change):
+		if obj.id == None:
+			obj.creadaPor = request.user
+		else:
+			obj.modificadaPor = request.user
+
+		obj.save()
 
 class Miembro_CargoInline(admin.StackedInline):
 	model = Miembro_Cargo
-	extra = 1
+	extra = 0
 
 class Curso_MiembroInline(admin.StackedInline):
 	model = Curso_Miembro
-	extra = 1
+	extra = 0
 
 class TrabajoRealizadoInline(admin.StackedInline):
 	model = TrabajoRealizado
-	extra = 1
+	extra = 0
 
 class TrayectoriaMiembroInline(admin.StackedInline):
 	model = TrayectoriaMiembro
-	extra = 1
+	extra = 0
 
 @admin.register(Miembro)
 class MiembroAdmin(admin.ModelAdmin):
@@ -76,27 +94,15 @@ class PastorAdmin(admin.ModelAdmin):
 	list_display = ['id','miembro',]
 	search_fields = ('miembro',)
 
-@admin.register(Pastor_Asign)
-class Pastor_AsignAdmin(admin.ModelAdmin):
-	list_display = ['id','pastor', 'iglesia', 'fecha_inicio', 'fecha_fin']
-	list_editable = ('fecha_inicio', 'fecha_fin',)
-	search_fields = ('pastor',)
-
 @admin.register(Presbitero)
 class PresbiteroAdmin(admin.ModelAdmin):
 	list_display = ['id','miembro',]
 	search_fields = ('miembro',)
 
-@admin.register(Presbitero_Asign)
-class Presbitero_AsignAdmin(admin.ModelAdmin):
-	list_display = ['id','presbitero', 'zona', 'fecha_inicio', 'fecha_fin']
-	list_editable = ('fecha_inicio', 'fecha_fin',)
-	search_fields = ('presbitero',)
 
-
-@admin.register(Cuerpo_Oficial)
-class Cuerpo_OficialAdmin(admin.ModelAdmin):
-	list_display = ['id','iglesia', 'pastor', 'miembro', 'cargo', 'desde', 'hasta']
-	list_editable = ('desde', 'hasta', 'cargo')
-	search_fields = ('miembro',)
-	raw_id_fields = ('miembro',)
+# @admin.register(Cuerpo_Oficial)
+# class Cuerpo_OficialAdmin(admin.ModelAdmin):
+# 	list_display = ['id','iglesia', 'pastor', 'miembro', 'cargo', 'desde', 'hasta']
+# 	list_editable = ('desde', 'hasta', 'cargo')
+# 	search_fields = ('miembro',)
+# 	raw_id_fields = ('miembro',)
