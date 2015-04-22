@@ -38,7 +38,7 @@ class Tipo_Cargo(models.Model):
 class Cargo(models.Model):
 	
 	descripcion = models.CharField(max_length=100, unique=True)
-	nivel = models.PositiveIntegerField()
+	# nivel = models.PositiveIntegerField()
 	
 	tipo_cargo = models.ForeignKey(Tipo_Cargo)
 	area = models.ForeignKey(Area)
@@ -271,6 +271,20 @@ class Miembro(models.Model):
 		ordering = ('nombres',)
 		verbose_name = 'Miembro'
 		verbose_name_plural = '3) Miembros'
+
+
+# Hijos Miembros
+class Miembro_Hijos(models.Model):
+	miembro = models.ForeignKey(Miembro)
+	nombreHijo = models.CharField("Nombre de Hijo(a)", max_length=80, null=True, blank=True)
+	fechaNacimiento = models.DateField("Fecha de Nacimiento", null=True, blank=True)
+
+	def __unicode__(self):
+		return self.nombreHijo
+
+	class Meta:
+		verbose_name = 'Hijo de Miembro'
+		verbose_name_plural = 'Hijos de Miembro'
 
 
 # Cargos relacionados al miembro
