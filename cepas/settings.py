@@ -19,11 +19,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '5m)7$1^i-b9n!t6(&tg$e&pk)^x92ldq^5j7ld^wcu3mdg@b%@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gunicorn',
     'django_extensions',
     'mockups',
     'rest_framework',
@@ -65,8 +66,12 @@ WSGI_APPLICATION = 'cepas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-	'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cepas_db',
+        'USER': 'cepas',
+        'PASSWORD': 'C0ncilio123User',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -88,3 +93,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = '/home/appcepas/cepas/cepas_static/'
+MEDIA_ROOT = '/home/appcepas/cepas/cepas_static/media/'
+
+STATICFILES_DIRS = (
+	'/home/appcepas/cepas/cepas_static/',
+)
+
+#TEMPLATE_DIRS = (
+#        'home/appcepas/cepas/cepas/templates/',
+#)
