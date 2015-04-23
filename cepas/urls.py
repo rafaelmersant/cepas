@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from django.conf.urls import patterns, include, url
+=======
+rom django.conf.urls import patterns, include, url
+>>>>>>> 35eafb83f59a61c99a6b96673dff6304dc272aa2
 from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
