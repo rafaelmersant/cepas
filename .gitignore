@@ -1,4 +1,6 @@
+
 db.sqlite3
+cepas_static/
 cepas/settings.py
 ./**/migrations
 *.pyc
