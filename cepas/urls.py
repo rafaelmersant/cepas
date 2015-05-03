@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
+
+from administracion.views import MiembrosView
+
 admin.autodiscover()
 
 admin.site.site_header = 'CONCILIO ARCA DE SALVACION'
@@ -12,7 +15,9 @@ urlpatterns = patterns('',
 
     url(r'^$', 'cepas.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'accounts/login/$', 'cepas.views.login', name='login')
+    url(r'accounts/login/$', 'cepas.views.login', name='login'),
+
+    url(r'^miembros/$', MiembrosView.as_view(), name='Miembros'),
 )
 
 urlpatterns += patterns('',

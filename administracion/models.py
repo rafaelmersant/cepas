@@ -251,6 +251,7 @@ class Miembro(models.Model):
 	fecha_boda 			= models.DateField(blank=True, null=True)
 	nombre_de_pareja 	= models.CharField(max_length=100, blank=True, null=True)
 	pareja_cristiana 	= models.CharField(max_length=1,choices=pareja_cristiana_choices, blank=True, null=True)
+	foto				= models.CharField(max_length=100, null=True, blank=True)
 
 	iglesia 			= models.ForeignKey(Iglesia, blank=True, null=True)
 	estatus 			= models.CharField(max_length=1, choices=estatus_choices, default='A')

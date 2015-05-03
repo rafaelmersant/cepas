@@ -1,27 +1,22 @@
-// @import 'nib/vendor'
+@import 'nib/vendor'
 // @import 'nib/gradients'
 @import 'normalize'
 
 
-// vendor-prefixes = o ms webkit moz
+vendor-prefixes = o ms webkit moz
 
-verde = #084C0B
-verdeClarito = #2BA92D
-verdeSubMenu = #138814 //#6ABF40
-verdeSuave = #94E698
-verdeMuySuave = #E1FFDD
-rojoClaro = #F63735
-rojoOscuro = #A81E1A
+azul = #4981FF
+azulClaro = #88ACFF
+azulMuyClaro = #BED8FF
+azulOscuro = #24407F
+azulMuyOscuro = #26417F
+azulMuyOscuroX = #0D237F
 mamey = #FF5A13
 amarillo = #FFF676
-amarilloOscuro = #CCA915
-verdeMuyOscuro = #132B14
-colorBordeSubMenu = lightgreen
 
 body
 	font-family "Arial", sans-serif, "serif"
 	font-size 14px
-	background lightblue
 	
 footer
 	background verdeMuyOscuro
@@ -30,7 +25,7 @@ footer
 	bottom 0
 	left 0
 	right 0
-	height 2em
+	height 3em
 	position absolute
 	// width 100%
 .imgHome-content
@@ -40,17 +35,17 @@ footer
 .imgHome
 	width 50%
 	border-radius 50%
-	// border 2px solid blue
-	opacity .05
+	opacity .02
 
 .header
-	background white
+	background azulMuyClaro
 	display block
+	color azulMuyOscuroX
 	overflow hidden
 	padding 0
 	position relative
-	border-bottom 2px solid gray
-	box-shadow 2px 2px 22px 1px gray
+	border-bottom 2px solid azulOscuro
+	box-shadow 2px 2px 2px 1px azulOscuro
 	
 .content-logo
 	float left
@@ -60,12 +55,13 @@ footer
 		outline none
 
 .logo
-	margin .2em 0 .1em .3em
+	margin .3rem 0 .1rem .2rem
 	width 75px
 	border-radius 50%
 
 .content-title
 	display inline-block
+	margin .5rem 0 0 .4rem
 	
 &.titleCepas
 	font-size 1rem
@@ -80,10 +76,12 @@ footer
 	bottom 0
 	right 0
 	position absolute
+	text-decoration none
+	color azulMuyOscuroX
 	
 	&:before
 		font-size 2em
-		color verdeMuyOscuro
+		color azulMuyOscuroX
 		
 
 //CLASES GENERICAS

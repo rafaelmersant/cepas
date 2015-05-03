@@ -17,12 +17,19 @@
 </head>
 
 <body ng-app="cepas">
+	<nav class="menu">
+		<li>Iglesias</li>
+		<li><a href="/miembros">Miembros</a></li>
+		<li>Pastores</li>
+		<li>Presbiteros</li>
+		<li>Obreros</li>
+	</nav>
 	<header class="header">
 		<figure class="content-logo">
-			<a href="/"><img class="logo" src={% static "images/logocepasH.jpg" %} alt=""></a>
+			<a href="/"><img class="logo" src={% static "images/logocepasHsmall.jpg" %} alt=""></a>
 		</figure>
 
-		<div class="icon-user usuario">{{user}} | {{localidad}}</div>
+		<a href="/admin" class="icon-user usuario">{{user}}</a>
 		<div class="content-title">
 			<p class="titleCepas">Concilio Evangelico Pentecostal "ARCA DE SALVACION", INC.</p>
 			<p class="titleCepas titleCepas2">Sistema de Administración</p>			

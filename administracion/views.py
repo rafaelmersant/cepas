@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from django.views.generic import View, TemplateView
 
-# Create your views here.
+from .models import Miembro
+
+class MiembrosView(TemplateView):
+
+	template_name = 'miembros.html'
