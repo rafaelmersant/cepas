@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 
-from administracion.views import MiembrosView
+from administracion.views import IglesiasView, MiembrosView, PastoresView, PresbiterosView, ObrerosView
 
 admin.autodiscover()
 
@@ -17,7 +17,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'accounts/login/$', 'cepas.views.login', name='login'),
 
+    url(r'^iglesias/$', IglesiasView.as_view(), name='Iglesias'),
     url(r'^miembros/$', MiembrosView.as_view(), name='Miembros'),
+    url(r'^pastores/$', PastoresView.as_view(), name='Pastores'),
+    url(r'^presbiteros/$', PresbiterosView.as_view(), name='Presbiteros'),
+    url(r'^obreros/$', ObrerosView.as_view(), name='Obreros'),
 )
 
 urlpatterns += patterns('',
