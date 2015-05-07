@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import Area, Tipo_Cargo, Cargo, Zona, Iglesia, Miembro, Miembro_Cargo, Curso_Miembro, \
 					Miembro_Hijos, TrabajoRealizado, TrayectoriaMiembro, Pastor, Pastor_Asign, Presbitero, \
-					Presbitero_Asign, Mobiliario, Cuerpo_Oficial, CampoBlanco 
+					Presbitero_Asign, Mobiliario, Cuerpo_Oficial, CampoBlanco, Miembro_Padres
 
 
 @admin.register(Area)
@@ -72,6 +72,10 @@ class Miembro_HijosInline(admin.StackedInline):
 	model = Miembro_Hijos
 	extra = 0
 
+class Miembro_PadresInline(admin.StackedInline):
+	model = Miembro_Padres
+	extra = 0
+
 class Curso_MiembroInline(admin.StackedInline):
 	model = Curso_Miembro
 	extra = 0
@@ -90,7 +94,8 @@ class MiembroAdmin(admin.ModelAdmin):
 	list_editable = ('nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia')
 	search_fields = ('nombres', 'apellidos')
 
-	inlines = [Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline, TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
+	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline,\
+				 TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
 
 
 @admin.register(Pastor)

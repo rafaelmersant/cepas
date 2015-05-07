@@ -15,6 +15,11 @@ class Area(models.Model):
 	def __unicode__(self):
 		return self.descripcion
 
+	def save(self, *args, **kwargs):
+		self.descripcion = self.descripcion.upper()
+
+		super(Area, self).save(*args, **kwargs)
+
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name = 'Area'
@@ -95,6 +100,11 @@ class Zona(models.Model):
 	def __unicode__(self):
 		return self.descripcion
 
+	def save(self, *args, **kwargs):
+		self.descripcion = self.descripcion.upper()
+
+		super(Zona, self).save(*args, **kwargs)
+
 	@property
 	def Presbitero(self):
 		try:
@@ -159,8 +169,14 @@ class Iglesia(models.Model):
 
 	def  __unicode__(self):
 		return self.titulo_conciliar
+	
+	def save(self, *args, **kwargs):
+		self.titulo_conciliar = self.titulo_conciliar.upper()
+		self.titulo_local = self.titulo_local.upper()
 
-	@property
+		super(Iglesia, self).save(*args, **kwargs)
+
+	@property 
 	def Pastor(self):
 		try:
 			p = Pastor_Asign.objects.get(fecha_fin='9999-12-31', iglesia__id=self.id)
@@ -247,11 +263,11 @@ class Miembro(models.Model):
 	fecha_profesionfe 	= models.DateField(blank=True, null=True)
 	tipo_miembro 		= models.CharField(max_length=1, choices=tipo_miembro_choices, default='M', null=True)
 	iglesia_procedencia = models.CharField(max_length=100, blank=True, null=True)
-	habilidades 		= models.TextField(max_length=250, blank=True, null=True)
+	habilidades 		= models.TextField("Habilidades (separadas por coma)", max_length=250, blank=True, null=True)
 	fecha_boda 			= models.DateField(blank=True, null=True)
 	nombre_de_pareja 	= models.CharField(max_length=100, blank=True, null=True)
 	pareja_cristiana 	= models.CharField(max_length=1,choices=pareja_cristiana_choices, blank=True, null=True)
-	foto				= models.CharField(max_length=100, null=True, blank=True)
+	foto				= models.FileField(upload_to='cepas/static/media/fotos/', null=True, blank=True)
 
 	iglesia 			= models.ForeignKey(Iglesia, blank=True, null=True)
 	estatus 			= models.CharField(max_length=1, choices=estatus_choices, default='A')
@@ -263,6 +279,13 @@ class Miembro(models.Model):
 
 	def __unicode__(self):
 		return '%s %s' % (self.nombres, self.apellidos)
+	
+	def save(self, *args, **kwargs):
+		self.nombres = self.nombres.upper()
+		self.apellidos = self.apellidos.upper()
+		self.nombre_de_pareja = self.nombre_de_pareja.upper() if self.nombre_de_pareja != None else ''
+
+		super(Miembro, self).save(*args, **kwargs)
 
 	@property
 	def nombreCompleto(self):
@@ -274,6 +297,30 @@ class Miembro(models.Model):
 		verbose_name_plural = '3) Miembros'
 
 
+# Padres de Miembro (Esto es obligatorio para niños y adolescentes)
+class Miembro_Padres(models.Model):
+	choices_cristiano = (('S','SI'), ('N','NO'))
+
+	miembro = models.ForeignKey(Miembro)
+	madre = models.CharField("Madre (o tutora)", max_length=80, null=True, blank=True)
+	madreCristiana = models.CharField("Madre (o tutora) Cristiana?", max_length=1, choices=choices_cristiano, default='S')
+	padre = models.CharField("Padre (o tutor)", max_length=80, null=True, blank=True)
+	padreCristiano = models.CharField("Padre (o tutor) Cristiano?", max_length=1, choices=choices_cristiano, default='S')
+
+	def __unicode__(self):
+		return 'Madre: %s - Padre: %s' % (self.madre, self.padre)
+	
+	def save(self, *args, **kwargs):
+		self.madre = self.madre.upper()
+		self.padre = self.padre.upper()
+
+		super(Miembro_Padres, self).save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = "Padres de Miembros (Obligatorio para niños y/o adolescentes"
+		verbose_name_plural = "Padres de Miembros (Obligatorio para niños y/o adolescentes"
+
+
 # Hijos Miembros
 class Miembro_Hijos(models.Model):
 	miembro = models.ForeignKey(Miembro)
@@ -282,6 +329,11 @@ class Miembro_Hijos(models.Model):
 
 	def __unicode__(self):
 		return self.nombreHijo
+		
+	def save(self, *args, **kwargs):
+		self.nombreHijo = self.nombreHijo.upper()
+
+		super(Miembro_Hijos, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name = 'Hijo de Miembro'

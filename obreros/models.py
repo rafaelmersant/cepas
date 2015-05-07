@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# MODEL DE ADMINISTRACION
+# MODEL DE OBRERO
 
 from django.db import models
+from django.contrib.auth.models import User
 
 from administracion.models import Iglesia, Pastor, Miembro
 
@@ -30,6 +31,11 @@ class Obrero(models.Model):
 	estatus = models.CharField(max_length=1, choices=estatus_choices, default='A')
 	iglesia = models.ForeignKey(Iglesia)
 	pastor = models.ForeignKey(Pastor)
+
+	creadoFecha			= models.DateTimeField(auto_now_add=True)
+	creadoPor			= models.ForeignKey(User, null=True, editable=False)
+	modificado			= models.DateTimeField(auto_now=True)
+	modificadoPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
 
 	def __unicode__(self):
 		return self.obrero.nombreCompleto

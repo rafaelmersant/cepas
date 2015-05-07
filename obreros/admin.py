@@ -20,3 +20,11 @@ class ObreroAdmin(admin.ModelAdmin):
 	search_fields = ('obrero',)
 
 	inlines = [AscensoInline]
+
+	def save_model(self, request, obj, form, change):
+		if obj.id == None:
+			obj.creadoPor = request.user
+		else:
+			obj.modificadoPor = request.user
+
+		obj.save()
