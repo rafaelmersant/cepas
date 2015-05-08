@@ -101,12 +101,12 @@ class MiembroAdmin(admin.ModelAdmin):
 				 TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
 
 	def save_model(self, request, obj, form, change):
-	if obj.id == None:
-		obj.creadaPor = request.user
-	else:
-		obj.modificadaPor = request.user
+		if obj.id == None:
+			obj.creadaPor = request.user
+		else:
+			obj.modificadaPor = request.user
 
-	obj.save()
+		obj.save()
 
 
 @admin.register(Pastor)
