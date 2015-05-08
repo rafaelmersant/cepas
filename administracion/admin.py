@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from cepas.actions import export_as_excel
+
 from .models import Area, Tipo_Cargo, Cargo, Zona, Iglesia, Miembro, Miembro_Cargo, Curso_Miembro, \
 					Miembro_Hijos, TrabajoRealizado, TrayectoriaMiembro, Pastor, Pastor_Asign, Presbitero, \
 					Presbitero_Asign, Mobiliario, Cuerpo_Oficial, CampoBlanco, Miembro_Padres
@@ -53,6 +55,7 @@ class IglesiaAdmin(admin.ModelAdmin):
 	list_editable = ('titulo_conciliar', 'titulo_local', 'zona', 'fecha_fundacion')
 	search_fields = ('titulo_conciliar', 'titulo_local')
 	list_filter = ('zona',)
+	actions = (export_as_excel,)
 
 	inlines = [CampoBlancoInline, MobiliarioInline, Pastor_AsignInline]
 
@@ -96,6 +99,7 @@ class MiembroAdmin(admin.ModelAdmin):
 	search_fields = ('nombres', 'apellidos')
 	
 	list_filter = ('creadaPor', 'iglesia',)
+	actions = (export_as_excel,)
 
 	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline,\
 				 TrabajoRealizadoInline, TrayectoriaMiembroInline, ]

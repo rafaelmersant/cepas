@@ -259,7 +259,7 @@ class Miembro(models.Model):
 	estado_civil 		= models.CharField(max_length=1, choices=estado_civil_choices, null=True, blank=True)
 	dia_nacimiento 		= models.PositiveIntegerField(blank=True, null=True)
 	mes_nacimiento 		= models.CharField(max_length=2, choices=mes_nacimiento_choices, blank=True, null=True)
-	anio_nacimiento 	= models.PositiveIntegerField("Año nacimiento", blank=True, null=True)
+	anio_nacimiento 	= models.PositiveIntegerField("Agno nacimiento", blank=True, null=True)
 	sociedad 			= models.CharField(max_length=1, choices=sociedad_choices, blank=True, null=True)
 	bautizado 			= models.CharField(max_length=2, choices=bautizado_choices, default='N', blank=True, null=True)
 	fecha_bautismo 		= models.DateField(blank=True, null=True)
