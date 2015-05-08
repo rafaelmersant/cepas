@@ -95,7 +95,7 @@ class MiembroAdmin(admin.ModelAdmin):
 	list_editable = ('nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia')
 	search_fields = ('nombres', 'apellidos')
 	
-	list_filter = ('iglesia', 'creadaPor',)
+	list_filter = ('creadaPor', 'iglesia',)
 
 	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline,\
 				 TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
