@@ -23,7 +23,25 @@ class Area(models.Model):
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name = 'Area'
-		verbose_name_plural = '4) Areas'
+		verbose_name_plural = '3) Areas'
+
+
+# Carreras
+class Carrera(models.Model):
+	descripcion = models.CharField("Carrera Universitaria", max_length=70)
+
+	def __unicode__(self):
+		return self.descripcion
+
+	def save(self, *args, **kwargs):
+		self.descripcion = self.descripcion.upper()
+
+		super(Carrera, self).save(*args, **kwargs)
+
+	class Meta:
+		ordering = ('descripcion',)
+		verbose_name = 'Carrera'
+		verbose_name_plural = 'Carreras'
 
 
 # Tipos de Cargos
@@ -36,7 +54,7 @@ class Tipo_Cargo(models.Model):
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name = "Tipo de Cargo"
-		verbose_name_plural = "5) Tipos de Cargos"
+		verbose_name_plural = "4) Tipos de Cargos"
 
 
 # Cargos
@@ -54,7 +72,7 @@ class Cargo(models.Model):
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name = 'Cargo'
-		verbose_name_plural = '6) Cargos'
+		verbose_name_plural = '5) Cargos'
 
 
 # Zonas (Presbiterales - Iglesias)
@@ -116,7 +134,7 @@ class Zona(models.Model):
 
 	class Meta:
 		ordering = ('descripcion',)
-		verbose_name_plural = '7) Zonas'
+		verbose_name_plural = '6) Zonas'
 
 
 # Conceptos de Tesoreria  -- USO FUTURO
@@ -275,10 +293,12 @@ class Miembro(models.Model):
 	iglesia 			= models.ForeignKey(Iglesia, blank=True, null=True)
 	estatus 			= models.CharField(max_length=1, choices=estatus_choices, default='A')
 
-	creadaFecha			= models.DateTimeField(auto_now_add=True)
-	creadaPor			= models.ForeignKey(User, null=True, editable=False)
-	modificada			= models.DateTimeField(auto_now=True)
-	modificadaPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
+	carrera				= models.ForeignKey(Carrera, blank=True, null=True)
+
+	creadoFecha			= models.DateTimeField(auto_now_add=True)
+	creadoPor			= models.ForeignKey(User, null=True, editable=False)
+	modificado			= models.DateTimeField(auto_now=True)
+	modificadoPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
 
 	def __unicode__(self):
 		return '%s %s' % (self.nombres, self.apellidos)
@@ -297,7 +317,7 @@ class Miembro(models.Model):
 	class Meta:
 		ordering = ('nombres',)
 		verbose_name = 'Miembro'
-		verbose_name_plural = '3) Miembros'
+		verbose_name_plural = '2) Miembros'
 
 
 # Padres de Miembro (Esto es obligatorio para niños y adolescentes)

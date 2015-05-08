@@ -4,11 +4,17 @@ from cepas.actions import export_as_excel
 
 from .models import Area, Tipo_Cargo, Cargo, Zona, Iglesia, Miembro, Miembro_Cargo, Curso_Miembro, \
 					Miembro_Hijos, TrabajoRealizado, TrayectoriaMiembro, Pastor, Pastor_Asign, Presbitero, \
-					Presbitero_Asign, Mobiliario, Cuerpo_Oficial, CampoBlanco, Miembro_Padres
+					Presbitero_Asign, Mobiliario, Cuerpo_Oficial, CampoBlanco, Miembro_Padres, Carrera
 
 
 @admin.register(Area)
-class AreaDmin(admin.ModelAdmin):
+class AreaAdmin(admin.ModelAdmin):
+	list_display = ['id', 'descripcion',]
+	list_editable = ('descripcion',)
+	search_fields = ('descripcion',)
+
+@admin.register(Carrera)
+class CarreraAdmin(admin.ModelAdmin):
 	list_display = ['id', 'descripcion',]
 	list_editable = ('descripcion',)
 	search_fields = ('descripcion',)
@@ -93,12 +99,12 @@ class TrayectoriaMiembroInline(admin.StackedInline):
 
 @admin.register(Miembro)
 class MiembroAdmin(admin.ModelAdmin):
-	list_display = ['id','cedula_pasaporte', 'nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia', 'creadaFecha', \
-					'creadaPor', 'modificada', 'modificadaPor']
+	list_display = ['id','cedula_pasaporte', 'nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia', 'creadoFecha', \
+					'creadoPor', 'modificado', 'modificadoPor']
 	list_editable = ('nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia')
 	search_fields = ('nombres', 'apellidos')
 	
-	list_filter = ('creadaPor', 'iglesia',)
+	list_filter = ('creadoPor', 'iglesia',)
 	actions = (export_as_excel,)
 
 	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline,\
