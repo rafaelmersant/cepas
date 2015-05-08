@@ -95,10 +95,18 @@ class MiembroAdmin(admin.ModelAdmin):
 	list_editable = ('nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia')
 	search_fields = ('nombres', 'apellidos')
 	
-	list_filter = ('iglesia', 'CreadaPor',)
+	list_filter = ('iglesia', 'creadaPor',)
 
 	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline,\
 				 TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
+
+	def save_model(self, request, obj, form, change):
+	if obj.id == None:
+		obj.creadaPor = request.user
+	else:
+		obj.modificadaPor = request.user
+
+	obj.save()
 
 
 @admin.register(Pastor)
