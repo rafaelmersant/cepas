@@ -206,6 +206,9 @@ class Miembro(models.Model):
 	estado_civil_choices = (
 					 		('S','Soltero(a)'),
 					 		('C','Casado(a)'),
+					 		('V','Viudo(a)'),
+					 		('U','Union Libre'),
+					 		('O','Otro'),
 						   )
 
 	mes_nacimiento_choices = (
@@ -246,14 +249,14 @@ class Miembro(models.Model):
 					 			 ('N','NO'),
 						   		)
 
-	cedula_pasaporte 	= models.CharField("Cedula o Pasaporte", max_length=13, blank=True, null=True)
 	nombres 			= models.CharField(max_length=40)
 	apellidos 			= models.CharField(max_length=40, blank=True, null=True)
+	cedula_pasaporte 	= models.CharField("Cedula o Pasaporte", max_length=13, blank=True, null=True)
 	telefonos 			= models.CharField(max_length=50, blank=True, null=True)
 	direccion 			= models.CharField(max_length=150, blank=True, null=True)
 	correo 				= models.CharField(max_length=50, blank=True, null=True)
 	sexo 				= models.CharField(max_length=1, choices=sexo_choices)
-	estado_civil 		= models.CharField(max_length=1, choices=estado_civil_choices, null=True)
+	estado_civil 		= models.CharField(max_length=1, choices=estado_civil_choices, null=True, blank=True)
 	dia_nacimiento 		= models.PositiveIntegerField(blank=True, null=True)
 	mes_nacimiento 		= models.CharField(max_length=2, choices=mes_nacimiento_choices, blank=True, null=True)
 	anio_nacimiento 	= models.PositiveIntegerField("Año nacimiento", blank=True, null=True)

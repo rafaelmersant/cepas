@@ -90,9 +90,12 @@ class TrayectoriaMiembroInline(admin.StackedInline):
 
 @admin.register(Miembro)
 class MiembroAdmin(admin.ModelAdmin):
-	list_display = ['id','cedula_pasaporte', 'nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia']
+	list_display = ['id','cedula_pasaporte', 'nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia', 'creadaFecha', \
+					'creadaPor', 'modificada', 'modificadaPor']
 	list_editable = ('nombres', 'apellidos', 'sociedad', 'bautizado', 'iglesia')
 	search_fields = ('nombres', 'apellidos')
+	
+	list_filter = ('iglesia', 'CreadaPor',)
 
 	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline,\
 				 TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
