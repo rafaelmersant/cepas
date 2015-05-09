@@ -43,6 +43,8 @@ class ObrerosView(TemplateView):
 
 # Todos los miembros o por nombre
 class MiembrosByNombreApellido(APIView):
+	authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permission_classes = (IsAuthenticated,)
 
 	serializer_class = MiembrosSerializer
 
