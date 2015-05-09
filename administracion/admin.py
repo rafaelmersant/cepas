@@ -112,9 +112,9 @@ class MiembroAdmin(admin.ModelAdmin):
 
 	def save_model(self, request, obj, form, change):
 		if obj.id == None:
-			obj.creadaPor = request.user
+			obj.creadoPor = request.user
 		else:
-			obj.modificadaPor = request.user
+			obj.modificadoPor = request.user
 
 		obj.save()
 
