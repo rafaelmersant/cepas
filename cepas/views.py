@@ -12,7 +12,7 @@ class LoginRequiredMixin(object):
 
 
 # Pagina HOME -- principal		
-@login_required
+# @login_required
 def home(request):
 
 	return render(request, 'homepage.html')

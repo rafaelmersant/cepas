@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 
+from rest_framework.authtoken.views import obtain_auth_token
+
 from administracion.views import IglesiasView, MiembrosView, PastoresView, PresbiterosView, ObrerosView, MiembrosByNombreApellido
 
 admin.autodiscover()
@@ -23,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^presbiteros/$', PresbiterosView.as_view(), name='Presbiteros'),
     url(r'^obreros/$', ObrerosView.as_view(), name='Obreros'),
 
+    url(r'^api/token/', obtain_auth_token, name='api-token'),
     url(r'^api/miembros/buscar/nombre-apellido/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
     url(r'^api/miembros/buscar/nombre-apellido/(?P<nombreApellido>[\w\s]+)/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
 

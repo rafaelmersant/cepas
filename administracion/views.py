@@ -50,7 +50,7 @@ class MiembrosByNombreApellido(APIView):
 		if nombreApellido == None:
 			miembros = Miembro.objects.all()
 		else:
-			miembros = Miembro.objects.filter( Q(nombres__contains=nombreApellido) | Q(apellidos__contains=nombreApellido))
+			miembros = Miembro.objects.filter( Q(nombres__contains=nombreApellido.upper()) | Q(apellidos__contains=nombreApellido.upper()))
 
 		response = self.serializer_class(miembros, many=True)
 		return Response(response.data)
