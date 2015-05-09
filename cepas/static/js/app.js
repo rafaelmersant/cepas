@@ -2,7 +2,8 @@
 
   var app = angular.module('cepas', [
     'cepas.menu',
-    'cepas.homepage'
+    'cepas.homepage',
+    'cepas.miembros'
     ]);
 
   app.factory('appService', ['$http', '$q', '$filter', function ($http, $q, $filter) {

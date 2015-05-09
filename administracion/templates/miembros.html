@@ -10,8 +10,22 @@
 		</figure>
 	</div> -->
 
-	<h1>Rafael Mercedes Santana</h1>
-	<h3>Ministro Licenciado / Co-pastor</h3>
+	<section class="clsMiembro" ng-controller="MiembrosCtrl">
+		
+		<div class="busqueda">
+			<span>Miembro</span>
+			<input type="text" ng-model="miembro">
+			<button class="Boton-azul boton-buscar-miembro" ng-click="buscarMiembro($event)">Buscar</button>
+		</div>
+
+		<ul ng-repeat="m in miembros">
+			<li>
+				<p>[[m.nombres]] [[m.apellidos]] ---> <strong>[[m.iglesia]]</strong></p>
+				<hr/>
+			</li>
+		</ul>
+
+	</section>
 
 
 {% endblock content %}
