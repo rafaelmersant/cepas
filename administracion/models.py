@@ -182,7 +182,7 @@ class Iglesia(models.Model):
 
 	creadaFecha			= models.DateTimeField(auto_now_add=True)
 	creadaPor			= models.ForeignKey(User, null=True, editable=False)
-	modificada			= models.DateTimeField(auto_now=True)
+	modificada			= models.DateTimeField(null=True, blank=True, editable=False)
 	modificadaPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
 
 	def  __unicode__(self):
@@ -213,6 +213,7 @@ class Iglesia(models.Model):
 class Miembro(models.Model):
 	estatus_choices = (
 					 ('A','Activo'),
+					 ('P','Pasivo'),
 					 ('I','Inactivo'),
 					)
 
@@ -281,9 +282,10 @@ class Miembro(models.Model):
 	sociedad 			= models.CharField(max_length=1, choices=sociedad_choices, blank=True, null=True)
 	bautizado 			= models.CharField(max_length=2, choices=bautizado_choices, default='N', blank=True, null=True)
 	fecha_bautismo 		= models.DateField(blank=True, null=True)
-	fecha_profesionfe 	= models.DateField(blank=True, null=True)
+	fecha_profesionfe 	= models.DateField("Fecha Profesion de Fe", blank=True, null=True)
 	tipo_miembro 		= models.CharField(max_length=1, choices=tipo_miembro_choices, default='M', null=True)
 	iglesia_procedencia = models.CharField(max_length=100, blank=True, null=True)
+	fechaIngresoCEPAS	= models.DateField("fecha Ingreso al Concilio", null=True, blank=True)
 	habilidades 		= models.TextField("Habilidades (separadas por coma)", max_length=250, blank=True, null=True)
 	fecha_boda 			= models.DateField(blank=True, null=True)
 	nombre_de_pareja 	= models.CharField(max_length=100, blank=True, null=True)
@@ -293,11 +295,9 @@ class Miembro(models.Model):
 	iglesia 			= models.ForeignKey(Iglesia, blank=True, null=True)
 	estatus 			= models.CharField(max_length=1, choices=estatus_choices, default='A')
 
-	carrera				= models.ForeignKey(Carrera, blank=True, null=True)
-
 	creadoFecha			= models.DateTimeField(auto_now_add=True)
 	creadoPor			= models.ForeignKey(User, null=True, editable=False)
-	modificado			= models.DateTimeField(auto_now=True)
+	modificado			= models.DateTimeField(null=True, blank=True, editable=False)
 	modificadoPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
 
 	def __unicode__(self):
@@ -318,6 +318,7 @@ class Miembro(models.Model):
 		ordering = ('nombres',)
 		verbose_name = 'Miembro'
 		verbose_name_plural = '2) Miembros'
+		unique_together = ('nombres', 'apellidos', 'iglesia')
 
 
 # Padres de Miembro (Esto es obligatorio para niños y adolescentes)
@@ -340,8 +341,8 @@ class Miembro_Padres(models.Model):
 		super(Miembro_Padres, self).save(*args, **kwargs)
 
 	class Meta:
-		verbose_name = "Padres de Miembros (Obligatorio para niños y/o adolescentes"
-		verbose_name_plural = "Padres de Miembros (Obligatorio para niños y/o adolescentes"
+		verbose_name = "Padres (Obligatorio niños y/o adolesc.)"
+		verbose_name_plural = "Padres (Obligatorio niños y/o adolesc.)"
 
 
 # Hijos Miembros
@@ -380,6 +381,37 @@ class Miembro_Cargo(models.Model):
 		verbose_name_plural = 'Cargos de Miembro'
 
 
+# Carreras realizadas por el miembro (tanto seculares como eclesiasticos a nivel universitario)
+class Carrera_Miembro(models.Model):
+	nivel_choices = (
+					 ('U','Unversitario'),
+					 ('M','Maestria'),
+					 ('P','Post-grado'),
+					 ('D','Doctorado'),
+					 ('O','Otro'),
+					)
+
+	clasificacion_choices = (('E','Eclesiastico'), ('S','Secular'))
+
+	carrera_descripcion = models.ForeignKey(Carrera)
+	institucion = models.CharField(max_length=150, blank=True)
+	anio_inicio = models.PositiveIntegerField("Año Inicio", null=True, blank=True)
+	anio_fin = models.PositiveIntegerField("Año Fin", null=True, blank=True)
+	nivel = models.CharField(max_length=1, choices=nivel_choices)
+	clasificacion = models.CharField(max_length=1, choices=clasificacion_choices, blank=True, null=True)
+
+	miembro = models.ForeignKey(Miembro)
+
+	def __unicode__(self):
+		return self.carrera_descripcion.descripcion
+
+	class Meta:
+		ordering = ('miembro', 'carrera_descripcion')
+		verbose_name = 'Carrera de Miembro'
+		verbose_name_plural = 'Carreras de Miembros'
+		unique_together = ('miembro', 'carrera_descripcion')
+
+
 # Cursos realizados por el miembro (tanto seculares como eclesiasticos)
 class Curso_Miembro(models.Model):
 	nivel_choices = (
@@ -402,6 +434,11 @@ class Curso_Miembro(models.Model):
 
 	def __unicode__(self):
 		return self.curso_descripcion
+	
+	def save(self, *args, **kwargs):
+		self.curso_descripcion = self.curso_descripcion.upper()
+
+		super(Curso_Miembro, self).save(*args, **kwargs)
 
 	class Meta:
 		ordering = ('miembro', 'curso_descripcion')

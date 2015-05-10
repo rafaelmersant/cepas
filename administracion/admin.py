@@ -4,7 +4,8 @@ from cepas.actions import export_as_excel
 
 from .models import Area, Tipo_Cargo, Cargo, Zona, Iglesia, Miembro, Miembro_Cargo, Curso_Miembro, \
 					Miembro_Hijos, TrabajoRealizado, TrayectoriaMiembro, Pastor, Pastor_Asign, Presbitero, \
-					Presbitero_Asign, Mobiliario, Cuerpo_Oficial, CampoBlanco, Miembro_Padres, Carrera
+					Presbitero_Asign, Mobiliario, Cuerpo_Oficial, CampoBlanco, Miembro_Padres, Carrera, \
+					Carrera_Miembro
 
 
 @admin.register(Area)
@@ -85,6 +86,10 @@ class Miembro_PadresInline(admin.StackedInline):
 	model = Miembro_Padres
 	extra = 0
 
+class Carrera_MiembroInline(admin.StackedInline):
+	model = Carrera_Miembro
+	extra = 0
+
 class Curso_MiembroInline(admin.StackedInline):
 	model = Curso_Miembro
 	extra = 0
@@ -107,8 +112,8 @@ class MiembroAdmin(admin.ModelAdmin):
 	list_filter = ('creadoPor', 'iglesia',)
 	actions = (export_as_excel,)
 
-	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Curso_MiembroInline,\
-				 TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
+	inlines = [Miembro_PadresInline, Miembro_HijosInline, Miembro_CargoInline, Carrera_MiembroInline,
+				Curso_MiembroInline, TrabajoRealizadoInline, TrayectoriaMiembroInline, ]
 
 	def save_model(self, request, obj, form, change):
 		if obj.id == None:
