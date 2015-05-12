@@ -18,6 +18,7 @@ class ObreroAdmin(admin.ModelAdmin):
 	list_display = ['id', 'obrero', 'credencial', 'iglesia', 'pastor', 'anio_nombramiento']
 	list_editable = ('credencial',)
 	search_fields = ('obrero',)
+	raw_id_fields = ('obrero',)
 
 	inlines = [AscensoInline]
 

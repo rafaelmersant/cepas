@@ -51,6 +51,11 @@ class Tipo_Cargo(models.Model):
 	def __unicode__(self):
 		return self.descripcion
 
+	def save(self, *args, **kwargs):
+		self.descripcion = self.descripcion.upper()
+
+		super(Tipo_Cargo, self).save(*args, **kwargs)
+
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name = "Tipo de Cargo"
@@ -68,7 +73,7 @@ class Cargo(models.Model):
 
 	def __unicode__(self):
 		return self.descripcion
-
+		
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name = 'Cargo'
@@ -306,6 +311,7 @@ class Miembro(models.Model):
 	def save(self, *args, **kwargs):
 		self.nombres = self.nombres.upper()
 		self.apellidos = self.apellidos.upper()
+		self.iglesia_procedencia = self.iglesia_procedencia.upper()
 		self.nombre_de_pareja = self.nombre_de_pareja.upper() if self.nombre_de_pareja != None else ''
 
 		super(Miembro, self).save(*args, **kwargs)
@@ -417,7 +423,7 @@ class Curso_Miembro(models.Model):
 	nivel_choices = (
 					 ('L','Taller'),
 					 ('T','Tecnico'),
-					 ('U','Unversitario'),
+					 ('B','Bachiller'),
 					 ('O','Otro'),
 					)
 
