@@ -15,10 +15,10 @@ class Area(models.Model):
 	def __unicode__(self):
 		return self.descripcion
 
-	def save(self, *args, **kwargs):
-		self.descripcion = self.descripcion.upper()
+	# def save(self, *args, **kwargs):
+	# 	self.descripcion = self.descripcion.upper()
 
-		super(Area, self).save(*args, **kwargs)
+	# 	super(Area, self).save(*args, **kwargs)
 
 	class Meta:
 		ordering = ('descripcion',)
@@ -73,7 +73,7 @@ class Cargo(models.Model):
 
 	def __unicode__(self):
 		return self.descripcion
-		
+
 	class Meta:
 		ordering = ('descripcion',)
 		verbose_name = 'Cargo'
@@ -455,7 +455,8 @@ class Curso_Miembro(models.Model):
 # Trabajos Realizados por el miembro
 class TrabajoRealizado(models.Model):
 	descripcion = models.TextField(max_length=300)
-	fecha = models.DateField()
+	fecha = models.DateField(null=True, blank=True)
+	agno = models.PositiveIntegerField(null=True, blank=True)
 
 	miembro = models.ForeignKey(Miembro)
 	area = models.ForeignKey(Area)
