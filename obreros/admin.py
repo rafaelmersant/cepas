@@ -14,9 +14,8 @@ class AscensoInline(admin.StackedInline):
 	extra = 1
 
 @admin.register(Obrero)
-class ObreroAdmin(admin.ModelAdmin):
-	list_display = ['id', 'obrero', 'credencial', 'iglesia', 'pastor', 'anio_nombramiento']
-	list_editable = ('credencial',)
+class ObreroAdmin(admin.ModelAdmin):	
+	list_display = ['id', 'obrero', 'CredencialObrero', 'iglesia', 'pastor', 'anio_nombramiento', 'AgnoUltimoAscenso']
 	search_fields = ('obrero',)
 	raw_id_fields = ('obrero',)
 

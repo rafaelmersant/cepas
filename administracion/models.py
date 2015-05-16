@@ -297,7 +297,7 @@ class Miembro(models.Model):
 	pareja_cristiana 	= models.CharField(max_length=1,choices=pareja_cristiana_choices, blank=True, null=True)
 	foto				= models.FileField(upload_to='cepas/static/media/fotos/', null=True, blank=True)
 
-	iglesia 			= models.ForeignKey(Iglesia, blank=True, null=True)
+	iglesia 			= models.ForeignKey(Iglesia)
 	estatus 			= models.CharField(max_length=1, choices=estatus_choices, default='A')
 
 	creadoFecha			= models.DateTimeField(auto_now_add=True)
@@ -456,7 +456,7 @@ class Curso_Miembro(models.Model):
 class TrabajoRealizado(models.Model):
 	descripcion = models.TextField(max_length=300)
 	fecha = models.DateField(null=True, blank=True)
-	agno = models.PositiveIntegerField(null=True, blank=True)
+	agno = models.PositiveIntegerField("Año", null=True, blank=True)
 
 	miembro = models.ForeignKey(Miembro)
 	area = models.ForeignKey(Area)

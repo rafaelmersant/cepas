@@ -11,6 +11,7 @@ from administracion.models import Iglesia, Pastor, Miembro
 # Credenciales de Obreros: Obrero Inicial/Exhortador/Licenciado, Ministro Licenciado/Ordenado.
 class Credencial(models.Model):
 	descripcion = models.CharField(max_length=25, unique=True)
+	orden = models.PositiveIntegerField(null=True, blank=True)
 
 	def __unicode__(self):
 		return self.descripcion
@@ -39,6 +40,28 @@ class Obrero(models.Model):
 
 	def __unicode__(self):
 		return self.obrero.nombreCompleto
+
+	def CredencialObrero(self):
+		try:
+			ascensos = Ascenso.objects.filter(obrero=self.obrero).latest('id')
+			credencialActual = ascensos.rango_nuevo.descripcion
+		except:
+			credencialActual = self.credencial.descripcion
+
+		return credencialActual
+		
+	CredencialObrero.short_description = 'Credencial Obrero'
+
+	def AgnoUltimoAscenso(self):
+		try:
+			ascensos = Ascenso.objects.filter(obrero=self.obrero).latest('id')
+			agnoUlt = ascensos.anio
+		except:
+			agnoUlt = self.anio_nombramiento
+
+		return agnoUlt
+
+	AgnoUltimoAscenso.short_description = 'Año Ultimo Ascenso'
 
 	class Meta:
 		ordering = ('obrero','anio_nombramiento')
