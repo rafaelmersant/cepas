@@ -43,18 +43,18 @@ class Obrero(models.Model):
 
 	def CredencialObrero(self):
 		try:
-			ascensos = Ascenso.objects.filter(obrero=self.obrero).latest('id')
+			ascensos = Ascenso.objects.filter(obrero=self.obrero).latest('rango_nuevo__orden')
 			credencialActual = ascensos.rango_nuevo.descripcion
 		except:
 			credencialActual = self.credencial.descripcion
 
 		return credencialActual
-		
+
 	CredencialObrero.short_description = 'Credencial Obrero'
 
 	def AgnoUltimoAscenso(self):
 		try:
-			ascensos = Ascenso.objects.filter(obrero=self.obrero).latest('id')
+			ascensos = Ascenso.objects.filter(obrero=self.obrero).latest('rango_nuevo__orden')
 			agnoUlt = ascensos.anio
 		except:
 			agnoUlt = self.anio_nombramiento
