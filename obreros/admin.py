@@ -5,7 +5,7 @@ from .models import Credencial, Obrero, Ascenso
 
 @admin.register(Credencial)
 class CredencialAdmin(admin.ModelAdmin):
-	list_display = ['id', 'descripcion',]
+	list_display = ['id', 'descripcion', 'orden']
 	list_editable = ('descripcion',)
 	search_fields = ('descripcion',)
 
@@ -16,8 +16,9 @@ class AscensoInline(admin.StackedInline):
 @admin.register(Obrero)
 class ObreroAdmin(admin.ModelAdmin):	
 	list_display = ['id', 'obrero', 'CredencialObrero', 'iglesia', 'pastor', 'anio_nombramiento', 'AgnoUltimoAscenso']
-	search_fields = ('obrero',)
+	search_fields = ('obrero__nombres', 'obrero__apellidos')
 	raw_id_fields = ('obrero',)
+	list_filter = ('iglesia', 'pastor', 'credencial', 'anio_nombramiento')
 
 	inlines = [AscensoInline]
 
