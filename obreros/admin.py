@@ -12,6 +12,7 @@ class CredencialAdmin(admin.ModelAdmin):
 class AscensoInline(admin.StackedInline):
 	model = Ascenso
 	extra = 1
+	ordering = ('anio',)
 
 @admin.register(Obrero)
 class ObreroAdmin(admin.ModelAdmin):	
