@@ -424,6 +424,8 @@ class Curso_Miembro(models.Model):
 					 ('L','Taller'),
 					 ('T','Tecnico'),
 					 ('B','Bachiller'),
+					 ('S','Secundaria'),
+					 ('P','Primaria'),
 					 ('O','Otro'),
 					)
 

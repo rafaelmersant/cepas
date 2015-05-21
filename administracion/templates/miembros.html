@@ -14,14 +14,17 @@
 		
 		<div class="busqueda">
 			<span>Miembro</span>
-			<input type="text" ng-model="miembro">
+			<input type="text" ng-model="miembro" ng-keyup="buscarMiembro($event)">
 			<button class="Boton-azul boton-buscar-miembro" ng-click="buscarMiembro($event)">Buscar</button>
 		</div>
 
-		<ul ng-repeat="m in miembros">
-			<li>
-				<p>[[m.nombres]] [[m.apellidos]] ---> <strong>[[m.iglesia]]</strong></p>
-				<hr/>
+		<ul ng-repeat="m in miembros" class="panel-miembros">
+			<li class="item-miembro">
+				<article class="art-miembro">
+					<span>[[m.nombres]] [[m.apellidos]]</span>
+					<span><strong>Iglesia: </strong>[[m.iglesia]]</span>
+					<span ng-if="m.correo.length > 0 "><strong>Correo: </strong>[[m.correo]] </span>
+				</article>
 			</li>
 		</ul>
 

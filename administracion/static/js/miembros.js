@@ -35,19 +35,20 @@
 
       //Buscar miembro
       $scope.buscarMiembro = function($event) {
+        $event.preventDefault();
 
       	try {
-	        MiembrosService.getMiembros($scope.miembro).then(function (data) {
-	        	console.log(data);
+          if($event.type == 'click' || $event.keyCode == 13) {
+  	        MiembrosService.getMiembros($scope.miembro).then(function (data) {
 
-	          $scope.miembros = data;
-	        });
-
+  	          $scope.miembros = data;
+              console.log(data)
+  	        });
+          } 
       	} catch (e) {
       		console.log(e);
       	}
       }
-
 
     }]);
 

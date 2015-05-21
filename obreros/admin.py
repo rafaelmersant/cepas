@@ -16,10 +16,10 @@ class AscensoInline(admin.StackedInline):
 
 @admin.register(Obrero)
 class ObreroAdmin(admin.ModelAdmin):	
-	list_display = ['id', 'obrero', 'CredencialObrero', 'iglesia', 'pastor', 'anio_nombramiento', 'AgnoUltimoAscenso']
+	list_display = ['id', 'obrero', 'CredencialObrero', 'iglesia', 'pastor', 'anio_nombramiento', 'AgnoUltimoAscenso', 'creadoFecha', 'creadoPor', 'modificado', 'modificadoPor']
 	search_fields = ('obrero__nombres', 'obrero__apellidos')
 	raw_id_fields = ('obrero',)
-	list_filter = ( 'credencial', 'iglesia', 'pastor', 'anio_nombramiento')
+	list_filter = ( 'creadoPor', 'iglesia', 'pastor', 'anio_nombramiento')
 
 	inlines = [AscensoInline]
 
