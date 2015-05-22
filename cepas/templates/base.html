@@ -30,7 +30,9 @@
 			<a href="/"><img class="logo" src={% static "images/logocepasHsmall.jpg" %} alt=""></a>
 		</figure>
 
-		<a href="/admin" class="icon-user usuario">{{user}}</a>
+		<!-- <a ng-if="{{user}} == AnonymousUser" href="/admin" class="icon-user usuario">Visitante</a> -->
+		<a ng-if="{{user}} != 'AnonymousUser'" href="/admin" class="icon-user usuario">{{user}}</a>
+
 		<div class="content-title">
 			<p class="titleCepas">Concilio Evangelico Pentecostal "ARCA DE SALVACION", INC.</p>
 			<p class="titleCepas titleCepas2">Sistema de Administración</p>			

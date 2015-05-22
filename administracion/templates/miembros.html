@@ -20,17 +20,20 @@
 
 		<ul ng-repeat="m in miembros" class="panel-miembros">
 			<li class="item-miembro">
-				<article class="art-miembro">
-					
-					<figure class="content-foto">
-						<img class="foto" src="/static/images/logocepasHsmall.jpg" alt="">
-					</figure>
+				<!-- <figure class="content-foto">
+					<img class="foto" src="/static/images/logocepasHsmall.jpg" alt="">
+				</figure> -->
+				<img class="foto" src="/static/images/logocepasHsmall.jpg" alt="">
 
-					<span>[[m.nombres]] [[m.apellidos]]</span> <div class="fechaRef"><strong>Desde:</strong> [[m.fechaRef]] </div>
+				<div class="detalle-miembro">
+					<span class="nombre-miembro">[[m.nombres]] [[m.apellidos]]</span> 
 					<span><strong>Iglesia: </strong>[[m.iglesia]]</span>
-					<span ng-if="m.correo.length > 0 "><strong>Correo: </strong>[[m.correo]] </span>
+					<span ng-if="m.correo.length > 0"><strong>Correo: </strong>[[m.correo]] </span>
 					<span><strong>Sociedad:</strong> [[m.sociedadDescrp]]</span>
-				</article>
+
+					<div class="fechaRef"><strong>Desde:</strong> [[m.fechaRef]] </div>
+				</div>
+
 			</li>
 		</ul>
 

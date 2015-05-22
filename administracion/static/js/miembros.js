@@ -15,7 +15,13 @@
 
         $http.get(url)
           .success(function (data) {
-            deferred.resolve(data);
+
+            if(data.length > 0) {
+              deferred.resolve(data);
+            } else {
+              deferred.reject();
+            }
+            
           });
         return deferred.promise;
       }
@@ -43,10 +49,13 @@
 
   	          $scope.miembros = data;
               console.log(data)
-  	        });
+  	        },
+            function (error) {
+              alert('No se pudo encontrar lo que buscaba.-');
+            });
           } 
       	} catch (e) {
-      		console.log(e);
+      		alert(e);
       	}
       }
 

@@ -141,36 +141,54 @@ footer
 	padding .3em 1em
 
 .panel-miembros
-	display flex-box
 	padding-left 1em
-	span
-		display block
-		margin .3em 0
-
-.content-foto
-	float left
-	margin 0
-	padding 0
-	& a
-		outline none
+	
+	.item-miembro
+		display flex-box
+		position relative
 		
-.foto
-	margin 0 .5rem 0 0
-	width 75px
-	border-radius 50%
-	
-.fechaRef
-	float right
-	bottom 0
-	
-.item-miembro
-	border 1px solid lightgray
-	list-style none
-	padding 1em
-	margin 0 1em 0 0
-	transition .3s
-	
-	&:hover
-		box-shadow 1px 1px 1px 1px gray
-		background #EEEEEE
+		border 1px solid lightgray
+		list-style none
+		padding 1em
+		margin 0 1em 0 0
+		transition .3s
+		
+		&:hover
+			box-shadow 1px 1px 1px 1px gray
+			background #EFEFEF
+			cursor pointer
+		
+		.content-foto
+			margin 0
+			padding 0
+			border 2px solid green
+			background pink
+			
+		.foto
+			margin 0 .5rem 0 0
+			width 75px
+			border-radius 50%			
+			position absolute
+			top .5em
+			left .3em
+
+		
+		.detalle-miembro
+			display flex
+			flex-direction column
+			position relative
+			margin-left 5.4em
+			
+			.nombre-miembro
+				font-weight bold
+				color azulMuyOscuroX
+				font-size 1.2em
+			
+			
+			.fechaRef
+				position absolute
+				right 0
+				bottom .02em
+
+
 //FIN MIEMBROS
