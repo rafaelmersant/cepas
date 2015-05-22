@@ -334,15 +334,17 @@ class Miembro(models.Model):
 			elif self.sociedad == 'A':
 				s = 'Adolescentes'
 			elif self.sociedad == 'N':
-				s = 'Niños'
+				s = 'Ninos'
+			else:
+				s = ''
 		except:
-			s = ''
+			s = None
 
 		return s
 
 	@property
 	def fechaRef(self):
-		fecha = None
+		fecha = ''
 
 		try:
 			if self.fecha_profesionfe != None:
@@ -352,7 +354,7 @@ class Miembro(models.Model):
 			elif self.fechaIngresoCEPAS != None:
 				fecha = self.fechaIngresoCEPAS
 		except:
-			fecha = None
+			fecha = ''
 
 		return fecha
 
