@@ -320,6 +320,42 @@ class Miembro(models.Model):
 	def nombreCompleto(self):
 		return '%s %s' % (self.nombres, self.apellidos)
 
+	@property
+	def sociedadDescrp(self):
+		s = ''
+
+		try:
+			if self.sociedad == 'D':
+				s = 'Damas'
+			elif self.sociedad == 'C':
+				s = 'Caballeros'
+			elif self.sociedad == 'J':
+				s = 'Jovenes'
+			elif self.sociedad == 'A':
+				s = 'Adolescentes'
+			elif self.sociedad == 'N':
+				s = 'Niños'
+		except:
+			s = ''
+
+		return s
+
+	@property
+	def fechaRef(self):
+		fecha = None
+
+		try:
+			if self.fecha_profesionfe != None:
+				fecha = self.fecha_profesionfe
+			elif self.fecha_bautismo != None:
+				fecha = self.fecha_bautismo
+			elif self.fechaIngresoCEPAS != None:
+				fecha = self.fechaIngresoCEPAS
+		except:
+			fecha = None
+
+		return fecha
+
 	class Meta:
 		ordering = ('nombres',)
 		verbose_name = 'Miembro'
