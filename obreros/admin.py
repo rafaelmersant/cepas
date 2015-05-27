@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from cepas.actions import export_as_excel
+
 from .models import Credencial, Obrero, Ascenso
 
 
@@ -20,7 +22,8 @@ class ObreroAdmin(admin.ModelAdmin):
 	search_fields = ('obrero__nombres', 'obrero__apellidos')
 	raw_id_fields = ('obrero',)
 	list_filter = ( 'creadoPor', 'iglesia', 'pastor', 'anio_nombramiento')
-
+	actions = (export_as_excel,)
+	
 	inlines = [AscensoInline]
 
 	def save_model(self, request, obj, form, change):

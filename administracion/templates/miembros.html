@@ -14,7 +14,16 @@
 		
 		<div class="busqueda">
 			<span>Miembro</span>
-			<input type="text" ng-model="miembro" ng-keyup="buscarMiembro($event)">
+			<input type="text" ng-model="nombres" placeholder="Nombres" ng-keyup="buscarMiembro($event)">
+			<span>Sociedad</span>
+			<select name="Sociedad" id="iSociedad" ng-model="sociedad">
+				<option value="undefined" selected>TODAS</option>
+				<option value="D">Damas</option>
+				<option value="C">Caballeros</option>
+				<option value="J">Jovenes</option>
+				<option value="A">Adolescentes</option>
+				<option value="N">Niños</option>
+			</select>
 			<button class="Boton-azul boton-buscar-miembro" ng-click="buscarMiembro($event)">Buscar</button>
 		</div>
 

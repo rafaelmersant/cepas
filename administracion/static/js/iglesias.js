@@ -1,10 +1,10 @@
 (function (_) {
 
-  angular.module('cepas.miembros', ['ngAnimate'])
+  angular.module('cepas.iglesias', ['ngAnimate'])
     
-    .factory('MiembrosService', ['$http', '$q', '$filter', function ($http, $q, $filter) {
+    .factory('IglesiasService', ['$http', '$q', '$filter', function ($http, $q, $filter) {
 
-      function getMiembros(nombres, sociedad) {
+      function getIglesias(titulo_conciliar, titulo_local) {
         var deferred = $q.defer();
 
         if((nombres == undefined) && sociedad == undefined) {
@@ -37,7 +37,7 @@
       }
 
       return {
-        getMiembros: getMiembros
+        getIglesias: getIglesias
       };
 
     }])
@@ -47,7 +47,7 @@
     //CONTROLLERS                                        *
     //                                                   *
     //****************************************************
-    .controller('MiembrosCtrl', ['$scope', '$filter', 'MiembrosService', function ($scope, $filter, MiembrosService) {
+    .controller('IglesiasCtrl', ['$scope', '$filter', 'IglesiasService', function ($scope, $filter, IglesiasService) {
 
       //Inicializar variables
       $scope.sociedad = 'undefined';

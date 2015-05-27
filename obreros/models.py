@@ -25,7 +25,7 @@ class Credencial(models.Model):
 class Obrero(models.Model):
 	estatus_choices = (('A','Activo'), ('I','Inactivo'))
 
-	anio_nombramiento = models.PositiveIntegerField("Año nombramiento")
+	anio_nombramiento = models.PositiveIntegerField("Anio nombramiento")
 	
 	obrero = models.ForeignKey(Miembro, unique=True)
 	credencial = models.ForeignKey(Credencial)

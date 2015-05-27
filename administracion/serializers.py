@@ -13,3 +13,4 @@ class MiembrosSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('id', 'nombres', 'apellidos', 'iglesia', 'telefonos', 'correo', 'sexo', \
 					'dia_nacimiento', 'mes_nacimiento', 'habilidades', 'fechaRef', 'sociedadDescrp')
 		ordering = ('nombres', 'apellidos',)
+
