@@ -28,7 +28,6 @@ urlpatterns = patterns('',
     url(r'^api/token/', obtain_auth_token, name='api-token'),
     url(r'^api/miembros/buscar/nombre-apellido/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
     url(r'^api/miembros/buscar/nombre-apellido/(?P<nombreApellido>[\w\s]+)/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
-    url(r'^api/miembros/buscar/nombre-apellido/(?P<nombreApellido>[\w\s]+)/(?P<sociedad>[\w])/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
 
 )
 

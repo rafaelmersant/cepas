@@ -50,16 +50,12 @@ class MiembrosByNombreApellido(APIView):
 
 	serializer_class = MiembrosSerializer
 
-	def get(self, request, nombreApellido=None, sociedad=None):
+	def get(self, request, nombreApellido=None):
 
 		if nombreApellido == None:
 			miembros = Miembro.objects.all()
-		elif sociedad == None:
+		else: 
 			miembros = Miembro.objects.filter( Q(nombres__contains=nombreApellido.upper()) | Q(apellidos__contains=nombreApellido.upper()))
-		else:
-			miembros = Miembro.objects.filter( Q(nombres__contains=nombreApellido.upper(), sociedad=sociedad) | \
-												Q(apellidos__contains=nombreApellido.upper(), sociedad=sociedad))
-
 
 		response = self.serializer_class(miembros, many=True)
 		return Response(response.data)

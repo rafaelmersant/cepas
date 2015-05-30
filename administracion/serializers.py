@@ -11,6 +11,6 @@ class MiembrosSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Miembro
 		fields = ('id', 'nombres', 'apellidos', 'iglesia', 'telefonos', 'correo', 'sexo', \
-					'dia_nacimiento', 'mes_nacimiento', 'habilidades', 'fechaRef', 'sociedadDescrp')
+					'dia_nacimiento', 'mes_nacimiento', 'habilidades', 'fechaRef', 'sociedadDescrp', 'sociedad')
 		ordering = ('nombres', 'apellidos',)
 

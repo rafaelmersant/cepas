@@ -7,21 +7,20 @@
       function getMiembros(nombres, sociedad) {
         var deferred = $q.defer();
 
-        if((nombres == undefined) && sociedad == undefined) {
-        	url = '/api/miembros/buscar/nombre-apellido/?format=json';
-        }
-
-        if(sociedad == "undefined") {
-          url = '/api/miembros/buscar/nombre-apellido/{nombreApellido}/?format=json'.replace('{nombreApellido}', nombres);
-        } else {
-        	url = '/api/miembros/buscar/nombre-apellido/{nombreApellido}/{sociedad}/?format=json'
-                  .replace('{nombreApellido}', nombres)
-                  .replace('{sociedad}', sociedad);
-        }
+        url = '/api/miembros/buscar/nombre-apellido/{nombreApellido}/?format=json'.replace('{nombreApellido}', nombres);
 
         $http.get(url)
           .success(function (data) {
 
+            console.log(sociedad)
+
+            if (sociedad != '*') {
+              data = data.filter(function (registros) {
+                return registros.sociedad == sociedad;
+              });
+            }
+
+console.log(data);
             if(data.length > 0) {
               deferred.resolve(data);
             } else {
@@ -50,8 +49,8 @@
     .controller('MiembrosCtrl', ['$scope', '$filter', 'MiembrosService', function ($scope, $filter, MiembrosService) {
 
       //Inicializar variables
-      $scope.sociedad = 'undefined';
-      
+      $scope.sociedad = '*';
+
       //Buscar miembro
       $scope.buscarMiembro = function($event) {
         $event.preventDefault();

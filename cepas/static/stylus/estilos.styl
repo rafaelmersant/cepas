@@ -6,11 +6,11 @@
 vendor-prefixes = o ms webkit moz khtml
 
 azul = #4981FF
-azulClaro = #88ACFF
-azulMuyClaro = #D8ECFF //#BED8FF
+azulClaro = #8FB6E5 //#88ACFF
+azulMuyClaro = #9FCBFF //#BED8FF
 azulOscuro = #24407F
-azulMuyOscuro = #26417F
-azulMuyOscuroX = #0D237F
+azulMuyOscuro = #4F657F
+azulMuyOscuroX = #283340
 mamey = #FF5A13
 amarillo = #FFF676
 
@@ -44,8 +44,8 @@ footer
 	overflow hidden
 	padding 0
 	position relative
-	border-bottom 1px solid azulOscuro
-	box-shadow 1px 1px 1px 1px azulOscuro
+	border-bottom 1px solid azulMuyOscuro
+	box-shadow 1px 1px 1px 1px azulMuyOscuro
 	
 .content-logo
 	float left
@@ -104,10 +104,10 @@ footer
 //CLASES GENERICAS
 
 .Boton-azul //CLASE para darle formato a los botones
-	background azul
+	background azulOscuro
 	border 0
-	border-bottom .1rem solid #0E0E95
-	border-radius 2px 2px 2px 2px
+	border-bottom .2rem solid azulClaro
+	border-radius 2px 2px 3px 3px
 	color white
 	transition .1s
 	outline none
@@ -116,7 +116,7 @@ footer
 		opacity .87
 		background mamey
 		// background brown
-		// border-bottom .1rem solid yellow
+		border-bottom .2rem solid brown
 		// color white
 		
 .Boton-disabled //CLASE para darle apariencia deshabilitado a botones
@@ -152,6 +152,8 @@ footer
 		padding 1em
 		margin 0 1em 0 0
 		transition .3s
+		
+		overflow hidden
 		
 		&:hover
 			box-shadow 1px 1px 1px 1px gray
