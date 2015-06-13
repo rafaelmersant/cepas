@@ -11,7 +11,17 @@
       function getDigitadores() {
         var deferred = $q.defer();
 
-        $http.get('/administracion/digitadores/')
+        $http.get('/administracion/digitadores-modificados/')
+          .success(function (data) {
+            deferred.resolve(data);
+          });
+        return deferred.promise;
+      }
+
+      function getDigitadoresCreados() {
+        var deferred = $q.defer();
+
+        $http.get('/administracion/digitadores-creados/')
           .success(function (data) {
             deferred.resolve(data);
           });
@@ -20,7 +30,8 @@
 
       return {
         homepage: homepage,
-        getDigitadores: getDigitadores
+        getDigitadores: getDigitadores,
+        getDigitadoresCreados: getDigitadoresCreados
       };
 
     }])
@@ -38,10 +49,14 @@
       }
 
       $scope.GetDigitadores = function() {
-
         HomePageService.getDigitadores().then(function (data) {
           $scope.registros = data;
+        });
+      }
 
+      $scope.GetDigitadoresCreados = function() {
+        HomePageService.getDigitadoresCreados().then(function (data) {
+          $scope.registrosCreados = data;
         });
       }
 

@@ -25,6 +25,20 @@
 			</tr>
 		</table>
 
+		<table class="clsDigitadoresCreados" ng-init="GetDigitadoresCreados()">
+			<tr><td colspan="3"><h2>Registros Creados</h2></td></tr>
+			<tr>
+				<td>Digitador</td>
+				<td>Iglesia</td>
+				<td>Cantidad</td>
+			</tr>
+			<tr ng-repeat="registro in registros">
+				<td>[[registro.username]]</td>
+				<td>[[registro.titulo_conciliar]]</td>
+				<td>[[registro.cantidad]]</td>
+			</tr>
+		</table>
+
 	</div>
 
 

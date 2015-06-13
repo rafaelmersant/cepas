@@ -63,7 +63,7 @@ class MiembrosByNombreApellido(APIView):
 		return Response(response.data)
 
 
-# Digitacion de usuarios
+# Digitacion de usuarios (Modificados)
 class GrupoDigitadores(LoginRequiredMixin, DetailView):
 
 	def get(self, request, *args, **kwargs):
@@ -79,6 +79,35 @@ class GrupoDigitadores(LoginRequiredMixin, DetailView):
 										INNER JOIN auth_user u on u.id = m.modificadoPor_id \
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
 										GROUP BY iglesia_id, modificadoPor_id \
+										HAVING cantidadTotal > 1 and username <> \'cepas\' \
+										ORDER BY cantidadTotal desc')
+
+		for registro in registros:
+			data.append({
+				'cantidad': registro.cantidadTotal,
+				'titulo_conciliar': registro.titulo_conciliar,
+				'username': registro.username,
+			})
+
+		return JsonResponse(data, safe=False)
+
+
+# Digitacion de usuarios (Creados)
+class GrupoDigitadoresCreados(LoginRequiredMixin, DetailView):
+
+	def get(self, request, *args, **kwargs):
+
+		return self.json_to_response()
+		
+	def json_to_response(self):
+		data = list()
+		registros = Miembro.objects.raw('SELECT m.id, count(0) as cantidadTotal, \
+											i.titulo_conciliar, \
+											u.username \
+										FROM administracion_miembro m \
+										INNER JOIN auth_user u on u.id = m.creadoPor_id \
+										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
+										GROUP BY iglesia_id, creadoPor_id \
 										HAVING cantidadTotal > 1 and username <> \'cepas\' \
 										ORDER BY cantidadTotal desc')
 
