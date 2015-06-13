@@ -8,8 +8,19 @@
         return false;
       }
 
+      function getDigitadores() {
+        var deferred = $q.defer();
+
+        $http.get('/administracion/digitadores/')
+          .success(function (data) {
+            deferred.resolve(data);
+          });
+        return deferred.promise;
+      }
+
       return {
-        homepage: homepage
+        homepage: homepage,
+        getDigitadores: getDigitadores
       };
 
     }])
@@ -26,6 +37,13 @@
         console.log('hola');
       }
 
+      $scope.GetDigitadores = function() {
+
+        HomePageService.getDigitadores().then(function (data) {
+          $scope.registros = data;
+
+        });
+      }
 
     }]);
 

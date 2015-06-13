@@ -4,7 +4,8 @@ from django.contrib import admin
 
 from rest_framework.authtoken.views import obtain_auth_token
 
-from administracion.views import IglesiasView, MiembrosView, PastoresView, PresbiterosView, ObrerosView, MiembrosByNombreApellido
+from administracion.views import IglesiasView, MiembrosView, PastoresView, PresbiterosView, ObrerosView, \
+                                    MiembrosByNombreApellido, GrupoDigitadores
 
 admin.autodiscover()
 
@@ -28,6 +29,8 @@ urlpatterns = patterns('',
     url(r'^api/token/', obtain_auth_token, name='api-token'),
     url(r'^api/miembros/buscar/nombre-apellido/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
     url(r'^api/miembros/buscar/nombre-apellido/(?P<nombreApellido>[\w\s]+)/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
+
+    url(r'^administracion/digitadores/$', GrupoDigitadores.as_view(), name='GrupoDigitadores'),
 
 )
 

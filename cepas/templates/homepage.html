@@ -11,6 +11,18 @@
 
 
 		<!-- <button class="Boton-azul" ng-click="saludoHome()">ESTO ES UN EJEMPLO </button> -->
+		<table class="clsDigitadores" ng-init="GetDigitadores()">
+			<tr>
+				<td>Digitador</td>
+				<td>Iglesia</td>
+				<td>Cantidad</td>
+			</tr>
+			<tr ng-repeat="registro in registros">
+				<td>[[registro.username]]</td>
+				<td>[[registro.titulo_conciliar]]</td>
+				<td>[[registro.cantidad]]</td>
+			</tr>
+		</table>
 
 	</div>
 
