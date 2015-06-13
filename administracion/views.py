@@ -102,19 +102,17 @@ class GrupoDigitadoresCreados(LoginRequiredMixin, DetailView):
 	def json_to_response(self):
 		data = list()
 		registros = Miembro.objects.raw('SELECT m.id, count(0) as cantidadTotal, \
-											i.titulo_conciliar, \
 											u.username \
 										FROM administracion_miembro m \
 										INNER JOIN auth_user u on u.id = m.creadoPor_id \
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
-										GROUP BY iglesia_id, creadoPor_id \
+										GROUP BY creadoPor_id \
 										HAVING cantidadTotal > 1 and username <> \'cepas\' \
 										ORDER BY cantidadTotal desc')
 
 		for registro in registros:
 			data.append({
 				'cantidad': registro.cantidadTotal,
-				'titulo_conciliar': registro.titulo_conciliar,
 				'username': registro.username,
 			})
 
