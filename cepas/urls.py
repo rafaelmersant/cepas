@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     url(r'^api/miembros/buscar/nombre-apellido/(?P<nombreApellido>[\w\s]+)/$', MiembrosByNombreApellido.as_view(), name='miembros_nombre_apellido'),
 
     url(r'^administracion/digitadores-modificados/$', GrupoDigitadores.as_view(), name='GrupoDigitadores'),
-    url(r'^administracion/digitadores-creados/$', GrupoDigitadores.as_view(), name='GrupoDigitadores'),
+    url(r'^administracion/digitadores-creados/$', GrupoDigitadoresCreados.as_view(), name='GrupoDigitadoresCreados'),
 
 )
 
