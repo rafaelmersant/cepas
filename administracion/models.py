@@ -579,6 +579,7 @@ class Pastor(models.Model):
 	class Meta:
 		verbose_name = 'Pastor'
 		verbose_name_plural = 'Pastores'
+		ordering = ('miembro__nombres',)
 
 
 # Cuando un pastor es asignado en un iglesia
