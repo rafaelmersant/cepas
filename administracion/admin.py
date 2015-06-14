@@ -126,7 +126,7 @@ class MiembroAdmin(admin.ModelAdmin):
 
 @admin.register(Pastor)
 class PastorAdmin(admin.ModelAdmin):
-	list_display = ['id','miembro',]
+	list_display = ['id', 'miembro', 'Iglesia']
 	search_fields = ('miembro',)
 
 @admin.register(Presbitero)

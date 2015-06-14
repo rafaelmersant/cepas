@@ -567,6 +567,15 @@ class Pastor(models.Model):
 	def __unicode__(self):
 		return '%s %s' % (self.miembro.nombres, self.miembro.apellidos)
 
+	@property
+	def Iglesia(self):
+		try:
+			igl = Pastor_Asign.objects.filter(pastor=self, fecha_fin='9999-12-31')[0].iglesia.titulo_conciliar
+		except:
+			igl = '----------'
+
+		return igl
+
 	class Meta:
 		verbose_name = 'Pastor'
 		verbose_name_plural = 'Pastores'

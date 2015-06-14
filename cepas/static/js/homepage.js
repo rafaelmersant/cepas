@@ -41,7 +41,8 @@
     //CONTROLLERS                                        *
     //                                                   *
     //****************************************************
-    .controller('HomePageCtrl', ['$scope', '$filter', 'HomePageService', function ($scope, $filter, HomePageService) {
+    .controller('HomePageCtrl', ['$scope', '$filter', '$window', 'HomePageService', 
+                                  function ($scope, $filter, $window, HomePageService) {
 
       $scope.saludoHome = function() {
         alert('SALUDO');
@@ -50,7 +51,15 @@
 
       $scope.GetDigitadores = function() {
         HomePageService.getDigitadores().then(function (data) {
+          if($window.LocalStorage['modificadosCEPAS'] == undefined) {
+            $window.LocalStorage['modificadosCEPAS'] = JSON.stringify(data);
+          } else {
+            var dataLocal = JSON.parse($window.LocalStorage['modificadosCEPAS']);
+            console.log(dataLocal);
+          }
+
           $scope.registros = data;
+          console.log(data);
         });
       }
 
