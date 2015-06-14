@@ -80,7 +80,7 @@ class GrupoDigitadores(LoginRequiredMixin, DetailView):
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
 										GROUP BY iglesia_id, modificadoPor_id \
 										HAVING cantidadTotal > 1 and username <> \'cepas\' \
-										ORDER BY cantidadTotal desc')
+										ORDER BY modificado desc')
 
 		for registro in registros:
 			data.append({
@@ -109,7 +109,7 @@ class GrupoDigitadoresCreados(LoginRequiredMixin, DetailView):
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
 										GROUP BY iglesia_id, creadoPor_id \
 										HAVING cantidadTotal > 1 and username <> \'cepas\' \
-										ORDER BY cantidadTotal desc')
+										ORDER BY creadoFecha desc')
 
 		for registro in registros:
 			data.append({
