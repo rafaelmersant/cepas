@@ -51,10 +51,17 @@
 
       $scope.GetDigitadores = function() {
         HomePageService.getDigitadores().then(function (data) {
-          if($window.LocalStorage['modificadosCEPAS'] == undefined) {
-            $window.LocalStorage['modificadosCEPAS'] = JSON.stringify(data);
+          if($window.localStorage['modificadosCEPAS'] == undefined) {
+            $window.localStorage['modificadosCEPAS'] = JSON.stringify(data);
           } else {
-            var dataLocal = JSON.parse($window.LocalStorage['modificadosCEPAS']);
+            var dataLocal = JSON.parse($window.localStorage['modificadosCEPAS']);
+            var i = 0;
+            data.forEach(function (item) {
+              if(item.cantidad != dataLocal[i].cantidad & item.username == dataLocal[i].username & item.titulo_conciliar == dataLocal[i].titulo_conciliar) {
+                dataLocal[i].cantidad = dataLocal[i].cantidad + '+';
+                i = i + 1;
+              }
+            })
             console.log(dataLocal);
           }
 
