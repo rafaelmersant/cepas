@@ -299,6 +299,7 @@ class Miembro(models.Model):
 
 	iglesia 			= models.ForeignKey(Iglesia)
 	estatus 			= models.CharField(max_length=1, choices=estatus_choices, default='A')
+	slug_name			= models.CharField(max_length=100, null=True, blank=True)
 
 	creadoFecha			= models.DateTimeField(auto_now_add=True)
 	creadoPor			= models.ForeignKey(User, null=True, editable=False)
@@ -313,6 +314,7 @@ class Miembro(models.Model):
 		self.apellidos = self.apellidos.upper()
 		self.iglesia_procedencia = self.iglesia_procedencia.upper()
 		self.nombre_de_pareja = self.nombre_de_pareja.upper() if self.nombre_de_pareja != None else ''
+		self.slug_name = '%s_%s' % (self.nombres.lower().replace(' ','_'), self.apellidos.lower().replace(' ','_'))
 
 		super(Miembro, self).save(*args, **kwargs)
 

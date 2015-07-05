@@ -5,13 +5,16 @@
 {% block content %}
 
 	<div class="HomePage" ng-controller="HomePageCtrl">
-		<figure class="imgHome-content">
-			<img src="/static/images/logocepasH130.jpg" alt="" class="imgHome">
-		</figure>
+		<div class="cargarDatos" ng-init="GetDigitadores(); GetDigitadoresCreados()">
+			
+		</div>
 
+		<!-- <figure class="imgHome-content">
+			<img src="/static/images/logocepasH130.jpg" alt="" class="imgHome">
+		</figure> -->
 
 		<!-- <button class="Boton-azul" ng-click="saludoHome()">ESTO ES UN EJEMPLO </button> -->
-		<table class="clsDigitadores" ng-init="GetDigitadores()">
+		<table ng-if="registros.length > 0" class="clsDigitadores">
 			<tr><td colspan="3"><h2>Registros Modificados</h2></td></tr>
 			<tr>
 				<td>Digitador</td>
@@ -25,7 +28,7 @@
 			</tr>
 		</table>
 
-		<table class="clsDigitadoresCreados" ng-init="GetDigitadoresCreados()">
+		<table ng-if="registrosCreados.length > 0" class="clsDigitadoresCreados">
 			<tr><td colspan="3"><h2>Registros Creados</h2></td></tr>
 			<tr>
 				<td>Digitador</td>

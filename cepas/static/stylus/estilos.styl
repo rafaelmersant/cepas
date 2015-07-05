@@ -33,6 +33,7 @@ footer
 	position absolute
 
 .imgHome-content
+	display flex-box
 	margin 4em auto
 	text-align center
 	
@@ -43,13 +44,14 @@ footer
 
 .header
 	background azulMuyClaro
-	display block
+	border-bottom 1px solid azulMuyOscuro
+	box-shadow 1px 1px 1px 1px azulMuyOscuro
 	color azulMuyOscuroX
+	// display block
 	overflow hidden
 	padding 0
 	position relative
-	border-bottom 1px solid azulMuyOscuro
-	box-shadow 1px 1px 1px 1px azulMuyOscuro
+	// margin-top 2rem
 	
 .content-logo
 	float left
@@ -140,9 +142,10 @@ footer
 
 .clsDigitadores
 	background azulClaro
-	position absolute
-	top 10rem
-	left 2rem
+	display inline-block
+	margin-left 1rem
+	margin-top 1rem
+	margin-right 1rem
 
 	& tr
 		& td
@@ -166,9 +169,10 @@ footer
 		
 .clsDigitadoresCreados
 	background azulClaro
-	position absolute
-	top 10rem
-	left 28rem
+	display inline-block
+	margin-left 1rem
+	margin-top 1rem
+	margin-right 1rem
 
 	& tr
 		& td

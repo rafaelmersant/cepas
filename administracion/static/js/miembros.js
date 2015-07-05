@@ -12,15 +12,12 @@
         $http.get(url)
           .success(function (data) {
 
-            console.log(sociedad)
-
             if (sociedad != '*') {
               data = data.filter(function (registros) {
                 return registros.sociedad == sociedad;
               });
             }
 
-console.log(data);
             if(data.length > 0) {
               deferred.resolve(data);
             } else {
@@ -58,10 +55,14 @@ console.log(data);
 
       	try {
           if($event.type == 'click' || $event.keyCode == 13) {
-  	        MiembrosService.getMiembros($scope.nombres, $scope.sociedad).then(function (data) {
+            var find = " ";
+            var reg = new RegExp(find, 'g');
+            var nombre;
+
+            nombre = $scope.nombres.replace(reg,'_');
+  	        MiembrosService.getMiembros(nombre, $scope.sociedad).then(function (data) {
 
   	          $scope.miembros = data;
-              console.log(data)
   	        },
             function (error) {
               alert('No se pudo encontrar lo que buscaba.-');

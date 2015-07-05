@@ -57,7 +57,8 @@ class MiembrosByNombreApellido(APIView):
 		if nombreApellido == None:
 			miembros = Miembro.objects.all()
 		else: 
-			miembros = Miembro.objects.filter( Q(nombres__contains=nombreApellido.upper()) | Q(apellidos__contains=nombreApellido.upper()))
+			miembros = Miembro.objects.filter(slug_name__contains=nombreApellido.lower())
+			# miembros = Miembro.objects.filter( Q(nombres__contains=nombreApellido.upper()) | Q(apellidos__contains=nombreApellido.upper()))
 
 		response = self.serializer_class(miembros, many=True)
 		return Response(response.data)
@@ -74,7 +75,7 @@ class GrupoDigitadores(LoginRequiredMixin, DetailView):
 		data = list()
 		registros = Miembro.objects.raw('SELECT m.id, count(0) as cantidadTotal, \
 											i.titulo_conciliar, \
-											case u.username when \'raydeli \' then \'raydeli+sobrino\' else u.username end username \
+											u.username \
 										FROM administracion_miembro m \
 										INNER JOIN auth_user u on u.id = m.modificadoPor_id \
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
