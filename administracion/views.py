@@ -75,7 +75,8 @@ class GrupoDigitadores(LoginRequiredMixin, DetailView):
 		data = list()
 		registros = Miembro.objects.raw('SELECT m.id, count(0) as cantidadTotal, \
 											i.titulo_conciliar, \
-											u.username \
+											u.username, \
+											i.seguir \
 										FROM administracion_miembro m \
 										INNER JOIN auth_user u on u.id = m.modificadoPor_id \
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
@@ -105,7 +106,8 @@ class GrupoDigitadoresCreados(LoginRequiredMixin, DetailView):
 		data = list()
 		registros = Miembro.objects.raw('SELECT m.id, count(0) as cantidadTotal, \
 											i.titulo_conciliar, \
-											u.username \
+											u.username, \
+											i.seguir \
 										FROM administracion_miembro m \
 										INNER JOIN auth_user u on u.id = m.creadoPor_id \
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
