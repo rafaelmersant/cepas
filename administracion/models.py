@@ -189,6 +189,7 @@ class Iglesia(models.Model):
 	creadaPor			= models.ForeignKey(User, null=True, editable=False)
 	modificada			= models.DateTimeField(null=True, blank=True, editable=False)
 	modificadaPor		= models.ForeignKey(User, null=True, editable=False, related_name='+')
+	seguir				= models.PositiveIntegerField(null=True, blank=True, default=0)
 
 	def  __unicode__(self):
 		return self.titulo_conciliar

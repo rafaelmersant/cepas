@@ -81,6 +81,7 @@ class GrupoDigitadores(LoginRequiredMixin, DetailView):
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
 										GROUP BY iglesia_id, modificadoPor_id \
 										HAVING cantidadTotal > 1 and username <> \'cepas\' \
+										AND i.seguir = 1 \
 										ORDER BY cantidadTotal desc')
 
 		for registro in registros:
@@ -110,6 +111,7 @@ class GrupoDigitadoresCreados(LoginRequiredMixin, DetailView):
 										LEFT OUTER JOIN administracion_iglesia i on i.id = m.iglesia_id \
 										GROUP BY iglesia_id, creadoPor_id \
 										HAVING cantidadTotal > 1 and username <> \'cepas\' \
+										AND i.seguir = 1 \
 										ORDER BY cantidadTotal desc')
 
 		for registro in registros:
